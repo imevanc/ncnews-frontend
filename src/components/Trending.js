@@ -2,12 +2,17 @@ import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
 import ArticleSmallView from "./ArticleSmallView";
 import DialogTitle from "@mui/material/DialogTitle";
+import Typography from "@mui/material/Typography";
 
 const Trending = () => {
   return (
     <>
       <Container maxWidth="xl">
-        <DialogTitle>Trending</DialogTitle>
+        <DialogTitle style={{ backgroundColor: "navy", color: "white" }}>
+          <Typography type="title" color="inherit">
+            Title
+          </Typography>
+        </DialogTitle>
         <Grid
           label="Trending"
           container

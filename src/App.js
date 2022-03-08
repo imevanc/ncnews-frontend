@@ -7,7 +7,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { useState } from "react";
 
 const App = () => {
-  const [ourMode, setOurMode] = useState("dark");
+  const [ourMode, setOurMode] = useState("light");
   const ourTheme = Theme(ourMode);
 
   return (
