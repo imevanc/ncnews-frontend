@@ -108,7 +108,19 @@ const ArticlesBlock = () => {
                       </Box>
                     );
                   } else {
-                    return page;
+                    return (
+                      <Box
+                        key={page}
+                        sx={{
+                          justifyContent: "flex-end",
+                          alignItems: "flex-end",
+                          flexGrow: 1,
+                          display: { xs: "none", md: "flex" },
+                        }}
+                      >
+                        {page}
+                      </Box>
+                    );
                   }
                 })}
               </>
