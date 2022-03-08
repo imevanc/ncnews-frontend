@@ -14,7 +14,13 @@ const Theme = (ourMode) => {
         main: "white",
       },
       typography: {
-        fontSize: "2rem",
+        fontSize: "1.7rem",
+      },
+      button: {
+        fontSize: "1.4rem",
+        primary: {
+          main: "white",
+        },
       },
     },
   });

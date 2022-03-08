@@ -1,8 +1,8 @@
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
 import ArticleSmallView from "./ArticleSmallView";
-import DialogTitle from "@mui/material/DialogTitle";
 import Typography from "@mui/material/Typography";
+import AppBar from "@mui/material/AppBar";
 
 import { useContext } from "react";
 import { ThemeContext } from "../theme/ThemeContext";
@@ -12,24 +12,23 @@ const Trending = () => {
   return (
     <>
       <Container maxWidth="xl">
-        <DialogTitle
-          style={{
-            backgroundColor: ourTheme.ourTheme.palette.primary.main,
-            color: ourTheme.ourTheme.palette.text.main,
-          }}
+        <AppBar
+          position="static"
+          sx={{ backgroundColor: ourTheme.ourTheme.palette.primary.main }}
         >
-          <Typography
-            sx={{
-              fontSize: ourTheme.ourTheme.palette.typography.fontSize,
-            }}
-            type="title"
-            color="inherit"
-          >
-            Trending
-          </Typography>
-        </DialogTitle>
+          <Container maxWidth="xl">
+            <Typography
+              sx={{
+                fontSize: ourTheme.ourTheme.palette.typography.fontSize,
+                color: ourTheme.ourTheme.palette.text.main,
+              }}
+            >
+              TRENDING
+            </Typography>
+          </Container>
+        </AppBar>
         <Grid
-          label="Trending"
+          label="TRENDING"
           container
           spacing={{ xs: 2, md: 3 }}
           columns={{ xs: 4, sm: 8, md: 12 }}
