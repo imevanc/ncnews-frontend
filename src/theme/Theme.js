@@ -10,6 +10,12 @@ const Theme = (ourMode) => {
       secondary: {
         main: "#f50000",
       },
+      text: {
+        main: "white",
+      },
+      typography: {
+        fontSize: "2rem",
+      },
     },
   });
 };

@@ -4,13 +4,28 @@ import ArticleSmallView from "./ArticleSmallView";
 import DialogTitle from "@mui/material/DialogTitle";
 import Typography from "@mui/material/Typography";
 
+import { useContext } from "react";
+import { ThemeContext } from "../theme/ThemeContext";
+
 const Trending = () => {
+  const ourTheme = useContext(ThemeContext);
   return (
     <>
       <Container maxWidth="xl">
-        <DialogTitle style={{ backgroundColor: "navy", color: "white" }}>
-          <Typography type="title" color="inherit">
-            Title
+        <DialogTitle
+          style={{
+            backgroundColor: ourTheme.ourTheme.palette.primary.main,
+            color: ourTheme.ourTheme.palette.text.main,
+          }}
+        >
+          <Typography
+            sx={{
+              fontSize: ourTheme.ourTheme.palette.typography.fontSize,
+            }}
+            type="title"
+            color="inherit"
+          >
+            Trending
           </Typography>
         </DialogTitle>
         <Grid

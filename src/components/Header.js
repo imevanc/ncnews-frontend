@@ -14,6 +14,8 @@ import NCIcon from "./NCIcon";
 import CustomSwitch from "./CustomSwitch";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
+import { useContext } from "react";
+import { ThemeContext } from "../theme/ThemeContext";
 
 const settings = ["Profile", "Plan", "Logout"];
 
@@ -27,9 +29,13 @@ const Header = (props) => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+  const ourTheme = useContext(ThemeContext);
 
   return (
-    <AppBar position="static">
+    <AppBar
+      position="static"
+      sx={{ backgroundColor: ourTheme.ourTheme.palette.primary.main }}
+    >
       <Container maxWidth="xl">
         <Toolbar disableGutters sx={{ justifyContent: "space-between" }}>
           <Typography

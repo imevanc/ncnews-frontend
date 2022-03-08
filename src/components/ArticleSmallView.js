@@ -22,7 +22,7 @@ const ArticleSmallView = () => {
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          <Typography variant="h5">Article Title</Typography>
+          <Typography variant="h6">Article Title</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography align="right">created_at by username</Typography>

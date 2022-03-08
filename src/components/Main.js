@@ -1,13 +1,13 @@
 import Weather from "./Weather";
 import Trending from "./Trending";
+import ArticlesBlock from "./ArticlesBlock";
 
 const Main = () => {
   return (
     <main>
       <Weather />
       <Trending />
-      <div>That's the toolbar block</div>
-      <div>That's the articles block</div>
+      <ArticlesBlock />
     </main>
   );
 };
