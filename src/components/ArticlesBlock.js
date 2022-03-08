@@ -14,9 +14,8 @@ import Grid from "@mui/material/Grid";
 
 import { useContext } from "react";
 import { ThemeContext } from "../theme/ThemeContext";
-import TopicsMenu from "./TopicsMenu";
 
-const pages = ["Sort_By", "Order", <TopicsMenu />];
+const pages = ["Sort_By", "Order", "Football", "Cooking", "Coding"];
 
 const ArticlesBlock = () => {
   const ourTheme = useContext(ThemeContext);
@@ -30,13 +29,23 @@ const ArticlesBlock = () => {
   };
   return (
     <>
-      <Container maxWidth="xl">
+      <Container
+        maxWidth="xl"
+        sx={{
+          justifyContent: "flex-center",
+          alignItems: "flex-center",
+        }}
+      >
         <AppBar
           position="static"
-          sx={{ backgroundColor: ourTheme.ourTheme.palette.primary.main }}
+          sx={{
+            justifyContent: "flex-center",
+            alignItems: "flex-center",
+            backgroundColor: ourTheme.ourTheme.palette.primary.main,
+          }}
         >
           <Container maxWidth="xl">
-            <Toolbar disableGutters sx={{ justifyContent: "space-between" }}>
+            <Toolbar disableGutters>
               <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
                 <IconButton
                   size="large"
@@ -53,12 +62,12 @@ const ArticlesBlock = () => {
                   anchorEl={anchorElNav}
                   anchorOrigin={{
                     vertical: "bottom",
-                    horizontal: "left",
+                    horizontal: "center",
                   }}
                   keepMounted
                   transformOrigin={{
                     vertical: "top",
-                    horizontal: "left",
+                    horizontal: "center",
                   }}
                   open={Boolean(anchorElNav)}
                   onClose={handleCloseNavMenu}
@@ -71,6 +80,7 @@ const ArticlesBlock = () => {
                       <Typography
                         textAlign="center"
                         sx={{
+                          spacing: 10,
                           fontSize:
                             ourTheme.ourTheme.palette.typography.fontSize,
                         }}
@@ -81,49 +91,30 @@ const ArticlesBlock = () => {
                   ))}
                 </Menu>
               </Box>
-              <>
-                {pages.map((page) => {
-                  if (typeof page === "string") {
-                    return (
-                      <Box
-                        key={page}
-                        sx={{
-                          // justifyContent: "flex-start",
-                          // alignItems: "flex-start",
-                          flexGrow: 1,
-                          display: { xs: "none", md: "flex" },
-                        }}
-                      >
-                        <Button
-                          key={page}
-                          onClick={handleCloseNavMenu}
-                          sx={{
-                            fontSize: ourTheme.ourTheme.palette.button.fontSize,
-                            color:
-                              ourTheme.ourTheme.palette.button.primary.main,
-                          }}
-                        >
-                          {page}
-                        </Button>
-                      </Box>
-                    );
-                  } else {
-                    return (
-                      <Box
-                        key={page}
-                        sx={{
-                          justifyContent: "flex-end",
-                          alignItems: "flex-end",
-                          flexGrow: 1,
-                          display: { xs: "none", md: "flex" },
-                        }}
-                      >
-                        {page}
-                      </Box>
-                    );
-                  }
-                })}
-              </>
+              <Box
+                display="flex"
+                justifyContent="space-between"
+                sx={{
+                  flexGrow: 1,
+                  display: { xs: "none", md: "flex" },
+                }}
+              >
+                {pages.map((page) => (
+                  <Button
+                    size="large"
+                    type="submit"
+                    key={page}
+                    onClick={handleCloseNavMenu}
+                    sx={{
+                      fontSize: ourTheme.ourTheme.palette.button.fontSize,
+                      color: ourTheme.ourTheme.palette.button.primary.main,
+                    }}
+                  >
+                    <span>{page}</span>
+                    <div></div>
+                  </Button>
+                ))}
+              </Box>
             </Toolbar>
           </Container>
         </AppBar>

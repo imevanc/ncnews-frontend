@@ -14,7 +14,7 @@ const Theme = (ourMode) => {
         main: "white",
       },
       typography: {
-        fontSize: "1.7rem",
+        fontSize: "1.4rem",
       },
       button: {
         fontSize: "1.4rem",
