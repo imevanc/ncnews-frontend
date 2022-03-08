@@ -28,109 +28,100 @@ const ArticlesBlock = () => {
     setAnchorElNav(null);
   };
   return (
-    <>
-      <Container
-        maxWidth="xl"
+    <Container sx={{ padding: "70px" }} maxWidth="xl">
+      <AppBar
+        position="static"
         sx={{
-          justifyContent: "flex-center",
-          alignItems: "flex-center",
+          backgroundColor: ourTheme.ourTheme.palette.primary.main,
         }}
       >
-        <AppBar
-          position="static"
-          sx={{
-            justifyContent: "flex-center",
-            alignItems: "flex-center",
-            backgroundColor: ourTheme.ourTheme.palette.primary.main,
-          }}
-        >
-          <Container maxWidth="xl">
-            <Toolbar disableGutters>
-              <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-                <IconButton
-                  size="large"
-                  aria-label="account of current user"
-                  aria-controls="menu-appbar"
-                  aria-haspopup="true"
-                  onClick={handleOpenNavMenu}
-                  color="inherit"
-                >
-                  <MenuIcon />
-                </IconButton>
-                <Menu
-                  id="menu-appbar"
-                  anchorEl={anchorElNav}
-                  anchorOrigin={{
-                    vertical: "bottom",
-                    horizontal: "center",
-                  }}
-                  keepMounted
-                  transformOrigin={{
-                    vertical: "top",
-                    horizontal: "center",
-                  }}
-                  open={Boolean(anchorElNav)}
-                  onClose={handleCloseNavMenu}
-                  sx={{
-                    display: { md: "none" },
-                  }}
-                >
-                  {pages.map((page) => (
-                    <MenuItem key={page} onClick={handleCloseNavMenu}>
-                      <Typography
-                        textAlign="center"
-                        sx={{
-                          spacing: 10,
-                          fontSize:
-                            ourTheme.ourTheme.palette.typography.fontSize,
-                        }}
-                      >
-                        {page}
-                      </Typography>
-                    </MenuItem>
-                  ))}
-                </Menu>
-              </Box>
-              <Box
-                display="flex"
-                justifyContent="space-between"
+        <Container maxWidth="xl">
+          <Toolbar disableGutters>
+            <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleOpenNavMenu}
+                color="inherit"
+              >
+                <MenuIcon />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorElNav}
+                anchorOrigin={{
+                  vertical: "bottom",
+                  horizontal: "center",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "center",
+                }}
+                open={Boolean(anchorElNav)}
+                onClose={handleCloseNavMenu}
                 sx={{
-                  flexGrow: 1,
-                  display: { xs: "none", md: "flex" },
+                  display: { md: "none" },
                 }}
               >
                 {pages.map((page) => (
-                  <Button
-                    size="large"
-                    type="submit"
-                    key={page}
-                    onClick={handleCloseNavMenu}
-                    sx={{
-                      fontSize: ourTheme.ourTheme.palette.button.fontSize,
-                      color: ourTheme.ourTheme.palette.button.primary.main,
-                    }}
-                  >
-                    <span>{page}</span>
-                    <div></div>
-                  </Button>
+                  <MenuItem key={page} onClick={handleCloseNavMenu}>
+                    <Typography
+                      textAlign="center"
+                      sx={{
+                        spacing: 10,
+                        fontSize: ourTheme.ourTheme.palette.typography.fontSize,
+                      }}
+                    >
+                      {page}
+                    </Typography>
+                  </MenuItem>
                 ))}
-              </Box>
-            </Toolbar>
-          </Container>
-        </AppBar>
-        <Grid
-          label="TRENDING"
-          container
-          spacing={{ xs: 2, md: 3 }}
-          columns={{ xs: 4, sm: 8, md: 12 }}
-        >
-          <ArticleSmallView />
-          <ArticleSmallView />
-          <ArticleSmallView />
-          <ArticleSmallView />
-        </Grid>
-      </Container>
-    </>
+              </Menu>
+            </Box>
+            <Box
+              display="flex"
+              justifyContent="space-between"
+              sx={{
+                flexGrow: 1,
+                display: { xs: "none", md: "flex" },
+              }}
+            >
+              {pages.map((page) => (
+                <Button
+                  size="large"
+                  type="submit"
+                  key={page}
+                  onClick={handleCloseNavMenu}
+                  // onClick={(event) => {
+                  //   console.log(event.target.innerHTML);
+                  // }}
+                  sx={{
+                    fontSize: ourTheme.ourTheme.palette.button.fontSize,
+                    color: ourTheme.ourTheme.palette.button.primary.main,
+                  }}
+                >
+                  <span value={page}>{page}</span>
+                </Button>
+              ))}
+            </Box>
+          </Toolbar>
+        </Container>
+      </AppBar>
+      <Grid
+        label="TRENDING"
+        container
+        spacing={{ xs: 2, md: 3 }}
+        columns={{ xs: 4, sm: 8, md: 12 }}
+      >
+        <ArticleSmallView />
+        <ArticleSmallView />
+        <ArticleSmallView />
+        <ArticleSmallView />
+      </Grid>
+    </Container>
   );
 };
 

@@ -22,6 +22,11 @@ const Theme = (ourMode) => {
           main: "white",
         },
       },
+      expansionPanel: {
+        primary: {
+          main: "#F7F7F7",
+        },
+      },
     },
   });
 };

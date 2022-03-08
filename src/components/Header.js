@@ -32,92 +32,90 @@ const Header = (props) => {
   const ourTheme = useContext(ThemeContext);
 
   return (
-    <>
-      <AppBar
-        position="static"
-        sx={{ backgroundColor: ourTheme.ourTheme.palette.primary.main }}
-      >
-        <Container maxWidth="xl">
-          <Toolbar disableGutters sx={{ justifyContent: "space-between" }}>
-            <Typography
-              variant="h6"
-              noWrap
-              component="div"
-              sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
-            >
-              <NCIcon />
-            </Typography>
+    <AppBar
+      position="static"
+      sx={{ backgroundColor: ourTheme.ourTheme.palette.primary.main }}
+    >
+      <Container maxWidth="xl">
+        <Toolbar disableGutters sx={{ justifyContent: "space-between" }}>
+          <Typography
+            variant="h6"
+            noWrap
+            component="div"
+            sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
+          >
+            <NCIcon />
+          </Typography>
 
-            <Typography
-              variant="h6"
-              noWrap
-              component="div"
-              sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
-            >
-              <NCIcon />
-            </Typography>
+          <Typography
+            variant="h6"
+            noWrap
+            component="div"
+            sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
+          >
+            <NCIcon />
+          </Typography>
 
-            <Typography
-              variant="h4"
-              component="div"
-              sx={{
-                flexGrow: 1,
-                display: { xs: "none", md: "flex" },
+          <Typography
+            variant="h4"
+            component="div"
+            sx={{
+              flexGrow: 1,
+              display: { xs: "none", md: "flex" },
+            }}
+          >
+            NC-NEWS
+          </Typography>
+
+          <FormGroup>
+            <FormControlLabel
+              control={
+                <CustomSwitch
+                  sx={{ m: 1 }}
+                  defaultChecked
+                  onChange={() =>
+                    props.setOurMode(
+                      props.ourMode === "light" ? "dark" : "light"
+                    )
+                  }
+                />
+              }
+              label={props.ourMode + " mode"}
+            />
+          </FormGroup>
+
+          <Box sx={{ flexGrow: 0 }}>
+            <Tooltip title="Open settings">
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                <Avatar alt="User" src="/a-broken-link" />
+              </IconButton>
+            </Tooltip>
+            <Menu
+              sx={{ mt: "45px" }}
+              id="menu-appbar"
+              anchorEl={anchorElUser}
+              anchorOrigin={{
+                vertical: "top",
+                horizontal: "right",
               }}
+              keepMounted
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              open={Boolean(anchorElUser)}
+              onClose={handleCloseUserMenu}
             >
-              NC-NEWS
-            </Typography>
-
-            <FormGroup>
-              <FormControlLabel
-                control={
-                  <CustomSwitch
-                    sx={{ m: 1 }}
-                    defaultChecked
-                    onChange={() =>
-                      props.setOurMode(
-                        props.ourMode === "light" ? "dark" : "light"
-                      )
-                    }
-                  />
-                }
-                label={props.ourMode + " mode"}
-              />
-            </FormGroup>
-
-            <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title="Open settings">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="User" src="/a-broken-link" />
-                </IconButton>
-              </Tooltip>
-              <Menu
-                sx={{ mt: "45px" }}
-                id="menu-appbar"
-                anchorEl={anchorElUser}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
-              >
-                {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting}</Typography>
-                  </MenuItem>
-                ))}
-              </Menu>
-            </Box>
-          </Toolbar>
-        </Container>
-      </AppBar>
-    </>
+              {settings.map((setting) => (
+                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                  <Typography textAlign="center">{setting}</Typography>
+                </MenuItem>
+              ))}
+            </Menu>
+          </Box>
+        </Toolbar>
+      </Container>
+    </AppBar>
   );
 };
 export default Header;

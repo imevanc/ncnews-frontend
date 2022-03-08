@@ -10,7 +10,6 @@ import { ThemeContext } from "./theme/ThemeContext";
 const App = () => {
   const [ourMode, setOurMode] = useState("light");
   const ourTheme = Theme(ourMode);
-
   return (
     <ThemeContext.Provider value={{ ourTheme }}>
       <ThemeProvider theme={ourTheme}>

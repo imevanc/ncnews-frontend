@@ -10,36 +10,34 @@ import { ThemeContext } from "../theme/ThemeContext";
 const Trending = () => {
   const ourTheme = useContext(ThemeContext);
   return (
-    <>
-      <Container maxWidth="xl">
-        <AppBar
-          position="static"
-          sx={{ backgroundColor: ourTheme.ourTheme.palette.primary.main }}
-        >
-          <Container maxWidth="xl">
-            <Typography
-              sx={{
-                fontSize: ourTheme.ourTheme.palette.typography.fontSize,
-                color: ourTheme.ourTheme.palette.text.main,
-              }}
-            >
-              TRENDING
-            </Typography>
-          </Container>
-        </AppBar>
-        <Grid
-          label="TRENDING"
-          container
-          spacing={{ xs: 2, md: 3 }}
-          columns={{ xs: 4, sm: 8, md: 12 }}
-        >
-          <ArticleSmallView />
-          <ArticleSmallView />
-          <ArticleSmallView />
-          <ArticleSmallView />
-        </Grid>
-      </Container>
-    </>
+    <Container maxWidth="xl">
+      <AppBar
+        position="static"
+        sx={{ backgroundColor: ourTheme.ourTheme.palette.primary.main }}
+      >
+        <Container maxWidth="xl">
+          <Typography
+            sx={{
+              fontSize: ourTheme.ourTheme.palette.typography.fontSize,
+              color: ourTheme.ourTheme.palette.text.main,
+            }}
+          >
+            TRENDING
+          </Typography>
+        </Container>
+      </AppBar>
+      <Grid
+        label="TRENDING"
+        container
+        spacing={{ xs: 2, md: 3 }}
+        columns={{ xs: 4, sm: 8, md: 12 }}
+      >
+        <ArticleSmallView />
+        <ArticleSmallView />
+        <ArticleSmallView />
+        <ArticleSmallView />
+      </Grid>
+    </Container>
   );
 };
 

@@ -17,7 +17,9 @@ const ArticleSmallView = () => {
         }}
       >
         <AccordionSummary
-          sx={{ flexGrow: 1 }}
+          sx={{
+            flexGrow: 1,
+          }}
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
           id="panel1a-header"
