@@ -1,6 +1,7 @@
 import "./App.css";
 import Header from "./components/Header";
 import Main from "./components/Main";
+import Footer from "./components/Footer";
 import Theme from "./theme/Theme";
 import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -16,6 +17,7 @@ const App = () => {
         <CssBaseline />
         <Header ourMode={ourMode} setOurMode={setOurMode} />
         <Main />
+        <Footer />
       </ThemeProvider>
     </ThemeContext.Provider>
   );
