@@ -6,14 +6,9 @@ import ArticlesBlock from "./ArticlesBlock";
 import { useState, useEffect } from "react";
 import * as api from "../api";
 
-let nextComponentArticlesBlock = null;
 const Main = () => {
   const [topics, setTopics] = useState([]);
-  if (topics.length) {
-    nextComponentArticlesBlock = <ArticlesBlock topics={topics} />;
-  } else {
-    nextComponentArticlesBlock = <LinearProgressWithColor />;
-  }
+
   useEffect(() => {
     const fetchTopics = async () => {
       return api
@@ -32,7 +27,11 @@ const Main = () => {
     <main>
       <Weather />
       <Trending />
-      {nextComponentArticlesBlock}
+      {topics.length ? (
+        <ArticlesBlock topics={topics} />
+      ) : (
+        <LinearProgressWithColor />
+      )}
     </main>
   );
 };
