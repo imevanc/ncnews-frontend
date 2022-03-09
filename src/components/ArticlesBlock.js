@@ -28,7 +28,7 @@ const ArticlesBlock = () => {
     setAnchorElNav(null);
   };
   return (
-    <Container sx={{ padding: "50px" }} maxWidth="xl">
+    <Container sx={{ padding: "50px 15px" }} maxWidth="xl">
       <AppBar
         position="static"
         sx={{
