@@ -11,17 +11,17 @@ import MenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
 import ArticleLargeView from "./ArticleLargeView";
 import Grid from "@mui/material/Grid";
-
+import LinearProgressWithColor from "./LinearProgressWithColor";
 import { useContext } from "react";
 import { ThemeContext } from "../theme/ThemeContext";
 import * as api from "../api";
 
-const pages = ["Sort_By", "Order", "Football", "Cooking", "Coding"];
-
 const ArticlesBlock = (props) => {
+  const pages = ["sort_by", "order", ...props.topics];
   const ourTheme = useContext(ThemeContext);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [codingArticles, setCodingArticles] = useState([]);
+
+  const [articles, setArticles] = useState([]);
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -29,20 +29,19 @@ const ArticlesBlock = (props) => {
     setAnchorElNav(null);
   };
   useEffect(() => {
-    const fetchArticles = async () => {
-      await api
-        .getArticles(props.topics[0])
+    const fetchArticles = async (aTopic) => {
+      return api
+        .getArticles(aTopic)
         .then((res) => {
-          console.log("topics", props.topics);
-          console.log("res", res);
           return res;
         })
-        .then((articles) => {
-          // const newCodingArticles = articles.articles;
-          // setCodingArticles(newCodingArticles);
+        .then((fetchedArticles) => {
+          setArticles((articles) => [...articles, ...fetchedArticles.articles]);
         });
     };
-    fetchArticles().catch((error) => console.log(error));
+    props.topics.forEach((aTopic) =>
+      fetchArticles(aTopic).catch((error) => console.log(error))
+    );
   }, []);
   return (
     <Container sx={{ padding: "50px 15px" }} maxWidth="xl">
@@ -129,15 +128,13 @@ const ArticlesBlock = (props) => {
       </AppBar>
       <Container sx={{ py: 4 }} maxWidth="xl">
         <Grid container spacing={5}>
-          <ArticleLargeView />
-          <ArticleLargeView />
-          <ArticleLargeView />
-          <ArticleLargeView />
-          <ArticleLargeView />
-          <ArticleLargeView />
-          <ArticleLargeView />
-          <ArticleLargeView />
-          <ArticleLargeView />
+          {articles.length ? (
+            articles.map((anArticle, idx) => {
+              return <ArticleLargeView article={anArticle} key={idx} />;
+            })
+          ) : (
+            <LinearProgressWithColor />
+          )}
         </Grid>
       </Container>
     </Container>
