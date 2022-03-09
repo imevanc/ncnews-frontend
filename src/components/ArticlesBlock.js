@@ -1,5 +1,4 @@
 import Container from "@mui/material/Container";
-import ArticleSmallView from "./ArticleSmallView";
 import Typography from "@mui/material/Typography";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
@@ -10,6 +9,7 @@ import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
+import ArticleLargeView from "./ArticleLargeView";
 import Grid from "@mui/material/Grid";
 
 import { useContext } from "react";
@@ -28,7 +28,7 @@ const ArticlesBlock = () => {
     setAnchorElNav(null);
   };
   return (
-    <Container sx={{ padding: "70px" }} maxWidth="xl">
+    <Container sx={{ padding: "50px" }} maxWidth="xl">
       <AppBar
         position="static"
         sx={{
@@ -91,7 +91,7 @@ const ArticlesBlock = () => {
             >
               {pages.map((page) => (
                 <Button
-                  size="large"
+                  size="small"
                   type="submit"
                   key={page}
                   onClick={handleCloseNavMenu}
@@ -110,17 +110,19 @@ const ArticlesBlock = () => {
           </Toolbar>
         </Container>
       </AppBar>
-      <Grid
-        label="TRENDING"
-        container
-        spacing={{ xs: 2, md: 3 }}
-        columns={{ xs: 4, sm: 8, md: 12 }}
-      >
-        <ArticleSmallView />
-        <ArticleSmallView />
-        <ArticleSmallView />
-        <ArticleSmallView />
-      </Grid>
+      <Container sx={{ py: 4 }} maxWidth="xl">
+        <Grid container spacing={5}>
+          <ArticleLargeView />
+          <ArticleLargeView />
+          <ArticleLargeView />
+          <ArticleLargeView />
+          <ArticleLargeView />
+          <ArticleLargeView />
+          <ArticleLargeView />
+          <ArticleLargeView />
+          <ArticleLargeView />
+        </Grid>
+      </Container>
     </Container>
   );
 };

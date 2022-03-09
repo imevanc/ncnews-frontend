@@ -18,8 +18,12 @@ const Theme = (ourMode) => {
       },
       button: {
         fontSize: "1.4rem",
+        smallFontSize: "1rem",
         primary: {
           main: "white",
+        },
+        secondary: {
+          main: "2e40a6",
         },
       },
       expansionPanel: {
