@@ -31,6 +31,14 @@ const Theme = (ourMode) => {
           main: "#F7F7F7",
         },
       },
+      progressBar: {
+        primary: {
+          main: "#2e40a6",
+        },
+        secondary: {
+          main: "#5f70c9",
+        },
+      },
     },
   });
 };

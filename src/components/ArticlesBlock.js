@@ -2,7 +2,7 @@ import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
@@ -14,19 +14,36 @@ import Grid from "@mui/material/Grid";
 
 import { useContext } from "react";
 import { ThemeContext } from "../theme/ThemeContext";
+import * as api from "../api";
 
 const pages = ["Sort_By", "Order", "Football", "Cooking", "Coding"];
 
-const ArticlesBlock = () => {
+const ArticlesBlock = (props) => {
   const ourTheme = useContext(ThemeContext);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
-
+  const [codingArticles, setCodingArticles] = useState([]);
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
+  useEffect(() => {
+    const fetchArticles = async () => {
+      await api
+        .getArticles(props.topics[0])
+        .then((res) => {
+          console.log("topics", props.topics);
+          console.log("res", res);
+          return res;
+        })
+        .then((articles) => {
+          // const newCodingArticles = articles.articles;
+          // setCodingArticles(newCodingArticles);
+        });
+    };
+    fetchArticles().catch((error) => console.log(error));
+  }, []);
   return (
     <Container sx={{ padding: "50px 15px" }} maxWidth="xl">
       <AppBar
