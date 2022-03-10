@@ -8,18 +8,23 @@ import Button from "@mui/material/Button";
 import { useContext } from "react";
 import { ThemeContext } from "../theme/ThemeContext";
 
-const ArticleLargeView = () => {
+const ArticleLargeView = (props) => {
   const ourTheme = useContext(ThemeContext);
-
   return (
     <Grid item xs={12} sm={6} md={4}>
       <Card sx={{ height: "100%", display: "flex", flexDirection: "column" }}>
         <CardContent sx={{ flexGrow: 1 }}>
-          <Typography gutterBottom variant="h5" component="h2">
-            Article Title
+          <Typography gutterBottom variant="h6" component="h2">
+            {props.article.title}
           </Typography>
-          <Typography align="right">created_at by username</Typography>
-          <Typography align="left">Article Body</Typography>
+          <Typography sx={{ align: "right" }}>
+            {props.article.created_at
+              .split("T")[0]
+              .split("-")
+              .reverse()
+              .join("-")}{" "}
+            by {props.article.author}
+          </Typography>
         </CardContent>
         <CardActions>
           <Button
