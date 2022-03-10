@@ -1,6 +1,4 @@
-import LinearProgressWithColor from "./LinearProgressWithColor";
-
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
@@ -16,17 +14,23 @@ import { useContext } from "react";
 import { ThemeContext } from "../theme/ThemeContext";
 import { Link } from "react-router-dom";
 
-const Main = (props) => {
+const NavBar = (props) => {
   const ourTheme = useContext(ThemeContext);
   const [anchorElNav, setAnchorElNav] = useState(null);
-
-  const [articles, setArticles] = useState([]);
+  // const [anchorSortByNav, setAnchorSortByNav] = useState(true);
+  // const sortBy = ["title", "author"];
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
+  // const handleOpenSortByNavMenu = (event) => {
+  //   setAnchorSortByNav(event.currentTarget);
+  // };
+  // const handleCloseSortByNavMenu = () => {
+  //   setAnchorSortByNav(null);
+  // };
   return (
     <main>
       <Container sx={{ padding: "50px 15px" }} maxWidth="xl">
@@ -88,6 +92,64 @@ const Main = (props) => {
                   ))}
                 </Menu>
               </Box>
+              {/* <Box sx={{ flexGrow: 0, display: { xs: "none", md: "flex" } }}>
+                <IconButton
+                  size="large"
+                  aria-label="account of current user"
+                  aria-controls="menu-appbar"
+                  aria-haspopup="true"
+                  onClick={handleOpenSortByNavMenu}
+                  color="inherit"
+                >
+                  <Typography
+                    textAlign="center"
+                    sx={{
+                      spacing: 10,
+                      fontSize: ourTheme.ourTheme.palette.typography.fontSize,
+                    }}
+                  >
+                    SORT_BY
+                  </Typography>
+                </IconButton>
+                <Menu
+                  id="menu-sort_by_bar"
+                  anchorEl={anchorSortByNav}
+                  anchorOrigin={{
+                    vertical: "bottom",
+                    horizontal: "center",
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "center",
+                  }}
+                  open={Boolean(anchorSortByNav)}
+                  onClose={handleCloseSortByNavMenu}
+                  sx={{
+                    display: { md: "none" },
+                  }}
+                >
+                  {sortBy.map((aSort) => (
+                    <MenuItem
+                      key={aSort}
+                      component={Link}
+                      to={`/${aSort}`}
+                      onClick={handleCloseSortByNavMenu}
+                    >
+                      <Typography
+                        textAlign="center"
+                        sx={{
+                          spacing: 10,
+                          fontSize:
+                            ourTheme.ourTheme.palette.typography.fontSize,
+                        }}
+                      >
+                        <span value={aSort}>{aSort}</span>
+                      </Typography>
+                    </MenuItem>
+                  ))}
+                </Menu>
+              </Box> */}
               <Box
                 display="flex"
                 justifyContent="space-between"
@@ -122,4 +184,4 @@ const Main = (props) => {
   );
 };
 
-export default Main;
+export default NavBar;

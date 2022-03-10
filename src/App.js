@@ -1,6 +1,6 @@
 import "./App.css";
 import Header from "./components/Header";
-import Main from "./components/Main";
+import NavBar from "./components/NavBar";
 import ArticlesBlock from "./components/ArticlesBlock";
 import Footer from "./components/Footer";
 import Theme from "./theme/Theme";
@@ -11,6 +11,7 @@ import { ThemeContext } from "./theme/ThemeContext";
 import * as api from "./api";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LinearProgressWithColor from "./components/LinearProgressWithColor";
+import ArticlesByTopic from "./components/ArticlesByTopic";
 
 const App = () => {
   const [ourMode, setOurMode] = useState("light");
@@ -36,7 +37,7 @@ const App = () => {
         <ThemeProvider theme={ourTheme}>
           <CssBaseline />
           <Header ourMode={ourMode} setOurMode={setOurMode} />
-          <Main topics={topics} />
+          <NavBar topics={topics} />
           <Routes>
             <Route
               path="/"
@@ -53,7 +54,7 @@ const App = () => {
                 <Route
                   key={idx}
                   path={`/${topic}`}
-                  element={<div key={idx}>Hello</div>}
+                  element={<ArticlesByTopic topic={topic} />}
                 />
               );
             })}
