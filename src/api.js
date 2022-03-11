@@ -29,3 +29,21 @@ export const getArticles = async (aTopic) => {
     .then((response) => response.data)
     .catch((error) => console.log(error));
 };
+
+export const getCommentsByArticleId = async (article_id) => {
+  return api({
+    method: "get",
+    url: `/articles/${article_id}/comments`,
+  })
+    .then((response) => response.data)
+    .catch((error) => console.log(error));
+};
+
+export const getArticleByArticleId = async (article_id) => {
+  return api({
+    method: "get",
+    url: `/articles/${article_id}`,
+  })
+    .then((response) => response.data)
+    .catch((error) => console.log(error));
+};

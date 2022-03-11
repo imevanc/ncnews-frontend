@@ -32,67 +32,65 @@ const NavBar = (props) => {
   //   setAnchorSortByNav(null);
   // };
   return (
-    <main>
-      <Container sx={{ padding: "50px 15px" }} maxWidth="xl">
-        <AppBar
-          position="static"
-          sx={{
-            backgroundColor: ourTheme.ourTheme.palette.primary.main,
-          }}
-        >
-          <Container maxWidth="xl">
-            <Toolbar disableGutters>
-              <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-                <IconButton
-                  size="large"
-                  aria-label="account of current user"
-                  aria-controls="menu-appbar"
-                  aria-haspopup="true"
-                  onClick={handleOpenNavMenu}
-                  color="inherit"
-                >
-                  <MenuIcon />
-                </IconButton>
-                <Menu
-                  id="menu-appbar"
-                  anchorEl={anchorElNav}
-                  anchorOrigin={{
-                    vertical: "bottom",
-                    horizontal: "center",
-                  }}
-                  keepMounted
-                  transformOrigin={{
-                    vertical: "top",
-                    horizontal: "center",
-                  }}
-                  open={Boolean(anchorElNav)}
-                  onClose={handleCloseNavMenu}
-                  sx={{
-                    display: { md: "none" },
-                  }}
-                >
-                  {props.topics.map((aTopic) => (
-                    <MenuItem
-                      key={aTopic}
-                      component={Link}
-                      to={`/${aTopic}`}
-                      onClick={handleCloseNavMenu}
+    <Container maxWidth="xl">
+      <AppBar
+        position="static"
+        sx={{
+          backgroundColor: ourTheme.ourTheme.palette.primary.main,
+        }}
+      >
+        <Container maxWidth="xl">
+          <Toolbar disableGutters>
+            <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleOpenNavMenu}
+                color="inherit"
+              >
+                <MenuIcon />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorElNav}
+                anchorOrigin={{
+                  vertical: "bottom",
+                  horizontal: "center",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "center",
+                }}
+                open={Boolean(anchorElNav)}
+                onClose={handleCloseNavMenu}
+                sx={{
+                  display: { md: "none" },
+                }}
+              >
+                {props.topics.map((aTopic) => (
+                  <MenuItem
+                    key={aTopic}
+                    component={Link}
+                    to={`/${aTopic}`}
+                    onClick={handleCloseNavMenu}
+                  >
+                    <Typography
+                      textAlign="center"
+                      sx={{
+                        spacing: 10,
+                        fontSize: ourTheme.ourTheme.palette.typography.fontSize,
+                      }}
                     >
-                      <Typography
-                        textAlign="center"
-                        sx={{
-                          spacing: 10,
-                          fontSize:
-                            ourTheme.ourTheme.palette.typography.fontSize,
-                        }}
-                      >
-                        <span value={aTopic}>{aTopic}</span>
-                      </Typography>
-                    </MenuItem>
-                  ))}
-                </Menu>
-              </Box>
-              {/* <Box sx={{ flexGrow: 0, display: { xs: "none", md: "flex" } }}>
+                      <span value={aTopic}>{aTopic}</span>
+                    </Typography>
+                  </MenuItem>
+                ))}
+              </Menu>
+            </Box>
+            {/* <Box sx={{ flexGrow: 0, display: { xs: "none", md: "flex" } }}>
                 <IconButton
                   size="large"
                   aria-label="account of current user"
@@ -150,37 +148,36 @@ const NavBar = (props) => {
                   ))}
                 </Menu>
               </Box> */}
-              <Box
-                display="flex"
-                justifyContent="space-between"
-                sx={{
-                  flexGrow: 1,
-                  display: { xs: "none", md: "flex" },
-                }}
-              >
-                {props.topics.map((aTopic, idx) => {
-                  return (
-                    <Button
-                      component={Link}
-                      to={`/${aTopic}`}
-                      size="small"
-                      type="submit"
-                      key={idx}
-                      sx={{
-                        fontSize: ourTheme.ourTheme.palette.button.fontSize,
-                        color: ourTheme.ourTheme.palette.button.primary.main,
-                      }}
-                    >
-                      <span value={aTopic}>{aTopic}</span>
-                    </Button>
-                  );
-                })}
-              </Box>
-            </Toolbar>
-          </Container>
-        </AppBar>
-      </Container>
-    </main>
+            <Box
+              display="flex"
+              justifyContent="space-between"
+              sx={{
+                flexGrow: 1,
+                display: { xs: "none", md: "flex" },
+              }}
+            >
+              {props.topics.map((aTopic, idx) => {
+                return (
+                  <Button
+                    component={Link}
+                    to={`/${aTopic}`}
+                    size="small"
+                    type="submit"
+                    key={idx}
+                    sx={{
+                      fontSize: ourTheme.ourTheme.palette.button.fontSize,
+                      color: ourTheme.ourTheme.palette.button.primary.main,
+                    }}
+                  >
+                    <span value={aTopic}>{aTopic}</span>
+                  </Button>
+                );
+              })}
+            </Box>
+          </Toolbar>
+        </Container>
+      </AppBar>
+    </Container>
   );
 };
 
