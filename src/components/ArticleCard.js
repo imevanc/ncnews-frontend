@@ -2,11 +2,13 @@ import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-
+import Box from "@mui/material/Box";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import * as api from "../api";
 import LinearProgressWithColor from "./LinearProgressWithColor";
+import VoteIcon from "./VoteIcon";
+import CardActions from "@mui/material/CardActions";
 
 const ArticleCard = () => {
   const [article, setArticle] = useState("");
@@ -29,7 +31,7 @@ const ArticleCard = () => {
   }, [article_id.article_id]);
 
   const evalLengthOfArticle = Object.keys(article).length;
-
+  console.log(article);
   return (
     <Container maxWidth="xl">
       <Card
@@ -72,32 +74,19 @@ const ArticleCard = () => {
             )}
           </Typography>
         </CardContent>
-        {/* <CardActions sx={{ display: "flex", justifycontent: "space-between" }}>
-          <Button
-            component={Link}
-            to="/article"
-            variant="contained"
-            type="submit"
+        <CardActions>
+          <Box
             sx={{
-              fontSize: ourTheme.ourTheme.palette.button.smallFontSize,
-              backgroundColor: ourTheme.ourTheme.palette.button.secondary.main,
+              bgcolor: "background.paper",
+              padding: "5px 15px",
             }}
-            size="small"
           >
-            View
-          </Button>
-          <Button
-            variant="contained"
-            type="submit"
-            sx={{
-              fontSize: ourTheme.ourTheme.palette.button.smallFontSize,
-              backgroundColor: ourTheme.ourTheme.palette.button.secondary.main,
-            }}
-            size="small"
-          >
-            Comments
-          </Button>
-        </CardActions> */}
+            <Box sx={{ color: "text.secondary" }}>
+              Total Votes: {article.votes}
+            </Box>
+            <VoteIcon />
+          </Box>
+        </CardActions>
       </Card>
     </Container>
   );
