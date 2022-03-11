@@ -12,8 +12,6 @@ const Theme = (ourMode) => {
       },
       text: {
         main: "white",
-        primary: "#173A5E",
-        secondary: "#46505A",
       },
       typography: {
         fontSize: "1.4rem",
@@ -43,9 +41,6 @@ const Theme = (ourMode) => {
         secondary: {
           main: "#5f70c9",
         },
-      },
-      background: {
-        paper: "#fff",
       },
     },
   });

@@ -31,7 +31,6 @@ const ArticleCard = () => {
   }, [article_id.article_id]);
 
   const evalLengthOfArticle = Object.keys(article).length;
-  console.log(article);
   return (
     <Container maxWidth="xl">
       <Card
@@ -77,14 +76,13 @@ const ArticleCard = () => {
         <CardActions>
           <Box
             sx={{
-              bgcolor: "background.paper",
               padding: "5px 15px",
             }}
           >
             <Box sx={{ color: "text.secondary" }}>
               Total Votes: {article.votes}
             </Box>
-            <VoteIcon />
+            <VoteIcon article={article} votes={article.votes} />
           </Box>
         </CardActions>
       </Card>
