@@ -12,6 +12,8 @@ import * as api from "./api";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LinearProgressWithColor from "./components/LinearProgressWithColor";
 import ArticlesByTopic from "./components/ArticlesByTopic";
+import Trending from "./components/Trending";
+import ArticleCard from "./components/ArticleCard";
 
 const App = () => {
   const [ourMode, setOurMode] = useState("light");
@@ -37,6 +39,7 @@ const App = () => {
         <ThemeProvider theme={ourTheme}>
           <CssBaseline />
           <Header ourMode={ourMode} setOurMode={setOurMode} />
+          <Trending />
           <NavBar topics={topics} />
           <Routes>
             <Route
@@ -58,6 +61,7 @@ const App = () => {
                 />
               );
             })}
+            <Route path="/article" element={<ArticleCard />} />
           </Routes>
           <Footer />
         </ThemeProvider>

@@ -10,7 +10,7 @@ import { ThemeContext } from "../theme/ThemeContext";
 const Trending = () => {
   const ourTheme = useContext(ThemeContext);
   return (
-    <Container maxWidth="xl">
+    <Container sx={{ padding: "50px 15px" }} maxWidth="xl">
       <AppBar
         position="static"
         sx={{ backgroundColor: ourTheme.ourTheme.palette.primary.main }}

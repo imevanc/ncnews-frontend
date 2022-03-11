@@ -4,7 +4,7 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
-
+import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { ThemeContext } from "../theme/ThemeContext";
 
@@ -26,8 +26,11 @@ const ArticleLargeView = (props) => {
             by {props.article.author}
           </Typography>
         </CardContent>
-        <CardActions>
+        <CardActions sx={{ display: "flex", justifycontent: "space-between" }}>
           <Button
+            component={Link}
+            state={{ article: props.article }}
+            to="/article"
             variant="contained"
             type="submit"
             sx={{
