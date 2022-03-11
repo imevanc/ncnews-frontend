@@ -1,11 +1,11 @@
+import { useState, useEffect } from "react";
 import Container from "@mui/material/Container";
-import React, { useState, useEffect } from "react";
 import ArticleLargeView from "./ArticleLargeView";
 import Grid from "@mui/material/Grid";
 import LinearProgressWithColor from "./LinearProgressWithColor";
 import * as api from "../api";
 
-const ArticlesBlock = (props) => {
+const ArticlesByTopic = (props) => {
   const [articles, setArticles] = useState([]);
 
   useEffect(() => {
@@ -16,13 +16,11 @@ const ArticlesBlock = (props) => {
           return res;
         })
         .then((fetchedArticles) => {
-          setArticles((articles) => [...articles, ...fetchedArticles.articles]);
+          setArticles([...fetchedArticles.articles]);
         });
     };
-    props.topics.forEach((aTopic) =>
-      fetchArticles(aTopic).catch((error) => console.log(error))
-    );
-  }, [props.topics]);
+    fetchArticles(props.topic).catch((error) => console.log(error));
+  }, [props.topic]);
   return (
     <Container maxWidth="xl">
       <Grid container spacing={5}>
@@ -38,4 +36,4 @@ const ArticlesBlock = (props) => {
   );
 };
 
-export default ArticlesBlock;
+export default ArticlesByTopic;
