@@ -30,7 +30,7 @@ const ArticleLargeView = (props) => {
           <Button
             component={Link}
             state={{ article: props.article }}
-            to="/article"
+            to={`/articles/${props.article.article_id}`}
             variant="contained"
             type="submit"
             sx={{

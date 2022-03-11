@@ -61,7 +61,7 @@ const App = () => {
                 />
               );
             })}
-            <Route path="/article" element={<ArticleCard />} />
+            <Route path="/articles/:article_id" element={<ArticleCard />} />
           </Routes>
           <Footer />
         </ThemeProvider>

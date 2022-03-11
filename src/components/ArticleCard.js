@@ -1,40 +1,35 @@
-import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
-import Button from "@mui/material/Button";
 
-import { useContext, useEffect, useState } from "react";
-import { ThemeContext } from "../theme/ThemeContext";
-import { useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import * as api from "../api";
 import LinearProgressWithColor from "./LinearProgressWithColor";
 
 const ArticleCard = () => {
-  const [commentsBody, setCommentsBody] = useState("");
-  const ourTheme = useContext(ThemeContext);
-  const location = useLocation();
-  const article = location.state.article;
+  const [article, setArticle] = useState("");
+  const article_id = useParams();
   useEffect(() => {
-    const fetchCommentsByArticleId = async (article_id) => {
+    const fetchArticleByArticleId = async (article_id) => {
       await api
-        .getCommentsByArticleId(article_id)
+        .getArticleByArticleId(article_id)
         .then((res) => {
-          return res.comments;
+          return res.article;
         })
-        .then((comments) => {
-          const newCommentsBody = comments;
-          setCommentsBody(newCommentsBody);
+        .then((fetchedArticle) => {
+          const newArticle = fetchedArticle;
+          setArticle(newArticle);
         });
     };
-    fetchCommentsByArticleId(article.article_id).catch((error) =>
+    fetchArticleByArticleId(article_id.article_id).catch((error) =>
       console.log(error)
     );
-  }, [article.article_id]);
+  }, [article_id.article_id]);
 
-  let evalLengthOfComments = Object.keys(commentsBody).length;
+  const evalLengthOfArticle = Object.keys(article).length;
+
   return (
     <Container maxWidth="xl">
       <Card
@@ -46,19 +41,31 @@ const ArticleCard = () => {
       >
         <CardContent sx={{ flexGrow: 1, align: "center" }}>
           <Typography gutterBottom variant="h6" component="h2">
-            {article.title}
+            {evalLengthOfArticle ? (
+              <div>{article.title}</div>
+            ) : (
+              <LinearProgressWithColor />
+            )}
           </Typography>
-          <Typography sx={{ align: "right" }}>
-            {article.created_at.split("T")[0].split("-").reverse().join("-")} by{" "}
-            {article.author}
+          <Typography sx={{ align: "right" }} component="div">
+            {evalLengthOfArticle ? (
+              <div>
+                {article.created_at
+                  .split("T")[0]
+                  .split("-")
+                  .reverse()
+                  .join("-")}{" "}
+                by {article.author}
+              </div>
+            ) : (
+              <LinearProgressWithColor />
+            )}
           </Typography>
           <Typography component="div">
-            {evalLengthOfComments ? (
+            {evalLengthOfArticle ? (
               <dl>
                 <dt>Article ID: {article.article_id}</dt>
                 <dt>Article Body: {article.body}</dt>
-                <dt>Article Id from comments: {commentsBody.article_id}</dt>
-                <dt>Comments Body: {commentsBody.body}</dt>
               </dl>
             ) : (
               <LinearProgressWithColor />
