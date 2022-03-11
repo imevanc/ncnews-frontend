@@ -37,31 +37,35 @@ const ArticleCard = () => {
   let evalLengthOfComments = Object.keys(commentsBody).length;
   return (
     <Container maxWidth="xl">
-      <Grid>
-        <Card
-          sx={{
-            height: "100%",
-            display: "flex",
-            flexDirection: "column",
-          }}
-        >
-          <CardContent sx={{ flexGrow: 1, align: "center" }}>
-            <Typography gutterBottom variant="h6" component="h2">
-              {article.title}
-            </Typography>
-            <Typography sx={{ align: "right" }}>
-              {article.created_at.split("T")[0].split("-").reverse().join("-")}{" "}
-              by {article.author}
-            </Typography>
-            <Typography>
-              {evalLengthOfComments ? (
-                [commentsBody.article_id, commentsBody.body, article.article_id]
-              ) : (
-                <LinearProgressWithColor />
-              )}
-            </Typography>
-          </CardContent>
-          {/* <CardActions sx={{ display: "flex", justifycontent: "space-between" }}>
+      <Card
+        sx={{
+          height: "100%",
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        <CardContent sx={{ flexGrow: 1, align: "center" }}>
+          <Typography gutterBottom variant="h6" component="h2">
+            {article.title}
+          </Typography>
+          <Typography sx={{ align: "right" }}>
+            {article.created_at.split("T")[0].split("-").reverse().join("-")} by{" "}
+            {article.author}
+          </Typography>
+          <Typography component="div">
+            {evalLengthOfComments ? (
+              <dl>
+                <dt>Article ID: {article.article_id}</dt>
+                <dt>Article Body: {article.body}</dt>
+                <dt>Article Id from comments: {commentsBody.article_id}</dt>
+                <dt>Comments Body: {commentsBody.body}</dt>
+              </dl>
+            ) : (
+              <LinearProgressWithColor />
+            )}
+          </Typography>
+        </CardContent>
+        {/* <CardActions sx={{ display: "flex", justifycontent: "space-between" }}>
           <Button
             component={Link}
             to="/article"
@@ -87,8 +91,7 @@ const ArticleCard = () => {
             Comments
           </Button>
         </CardActions> */}
-        </Card>
-      </Grid>
+      </Card>
     </Container>
   );
 };
