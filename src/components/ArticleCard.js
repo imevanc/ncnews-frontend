@@ -2,7 +2,6 @@ import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import Box from "@mui/material/Box";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import * as api from "../api";
@@ -74,16 +73,11 @@ const ArticleCard = () => {
           </Typography>
         </CardContent>
         <CardActions>
-          <Box
-            sx={{
-              padding: "5px 15px",
-            }}
-          >
-            <Box sx={{ color: "text.secondary" }}>
-              Total Votes: {article.votes}
-            </Box>
-            <VoteIcon article={article} votes={article.votes} />
-          </Box>
+          {evalLengthOfArticle ? (
+            <VoteIcon votes={article.votes} article_id={article.article_id} />
+          ) : (
+            <LinearProgressWithColor />
+          )}
         </CardActions>
       </Card>
     </Container>
