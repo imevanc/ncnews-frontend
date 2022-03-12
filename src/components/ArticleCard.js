@@ -8,6 +8,7 @@ import * as api from "../api";
 import LinearProgressWithColor from "./LinearProgressWithColor";
 import VoteIcon from "./VoteIcon";
 import CardActions from "@mui/material/CardActions";
+import Comments from "./Comments";
 
 const ArticleCard = () => {
   const [article, setArticle] = useState("");
@@ -79,6 +80,13 @@ const ArticleCard = () => {
             <LinearProgressWithColor />
           )}
         </CardActions>
+        <CardContent sx={{ flexGrow: 1, align: "center" }}>
+          {evalLengthOfArticle ? (
+            <Comments article_id={article.article_id} />
+          ) : (
+            <LinearProgressWithColor />
+          )}
+        </CardContent>
       </Card>
     </Container>
   );
