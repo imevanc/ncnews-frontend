@@ -47,3 +47,13 @@ export const getArticleByArticleId = async (article_id) => {
     .then((response) => response.data)
     .catch((error) => console.log(error));
 };
+
+export const patchArticleByArticleId = async (article_id, data) => {
+  return api({
+    method: "patch",
+    url: `/articles/${article_id}`,
+    data: data,
+  })
+    .then((response) => response.data)
+    .catch((error) => console.log(error));
+};
