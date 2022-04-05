@@ -31,7 +31,7 @@ const ArticleLargeView = (props) => {
             component={Link}
             state={{ article: props.article }}
             to={`/articles/${props.article.article_id}`}
-            variant="contained"
+            variant="outlined"
             type="submit"
             sx={{
               fontSize: ourTheme.ourTheme.palette.button.smallFontSize,
@@ -40,17 +40,6 @@ const ArticleLargeView = (props) => {
             size="small"
           >
             View
-          </Button>
-          <Button
-            variant="contained"
-            type="submit"
-            sx={{
-              fontSize: ourTheme.ourTheme.palette.button.smallFontSize,
-              backgroundColor: ourTheme.ourTheme.palette.button.secondary.main,
-            }}
-            size="small"
-          >
-            Comments
           </Button>
         </CardActions>
       </Card>
