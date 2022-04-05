@@ -9,6 +9,7 @@ import LinearProgressWithColor from "./LinearProgressWithColor";
 import VoteIcon from "./VoteIcon";
 import CardActions from "@mui/material/CardActions";
 import Comments from "./Comments";
+import CommentsForm from "./CommentsForm";
 
 const ArticleCard = () => {
   const [article, setArticle] = useState("");
@@ -86,6 +87,7 @@ const ArticleCard = () => {
           ) : (
             <LinearProgressWithColor />
           )}
+          <CommentsForm article={article} />
         </CardContent>
       </Card>
     </Container>
