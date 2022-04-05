@@ -12,6 +12,7 @@ import Comments from "./Comments";
 
 const ArticleCard = () => {
   const [article, setArticle] = useState("");
+
   const article_id = useParams();
   useEffect(() => {
     const fetchArticleByArticleId = async (article_id) => {
@@ -25,6 +26,7 @@ const ArticleCard = () => {
           setArticle(newArticle);
         });
     };
+
     fetchArticleByArticleId(article_id.article_id).catch((error) =>
       console.log(error)
     );
