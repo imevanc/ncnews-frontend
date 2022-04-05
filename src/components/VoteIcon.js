@@ -26,16 +26,13 @@ const VoteIcon = (props) => {
   const handleThumbDown = () => {
     handleChange(-1);
   };
-
   return (
     <Box
       sx={{
         padding: "5px 15px",
       }}
     >
-      <Box sx={{ color: "text.secondary" }}>
-        Total Votes: {votes >= 0 ? votes : "Loading"}
-      </Box>
+      <Box sx={{ color: "text.secondary" }}>Total Votes: {votes}</Box>
       <Box sx={{ "& > :not(style)": { m: 1 } }}>
         <Fab color="primary" aria-label="add">
           <ThumbUpIcon onClick={handleThumbUp} />

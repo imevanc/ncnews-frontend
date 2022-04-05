@@ -57,3 +57,13 @@ export const patchArticleByArticleId = async (article_id, data) => {
     .then((response) => response.data)
     .catch((error) => console.log(error));
 };
+
+export const postCommentByArticleId = async (article_id, data) => {
+  return api({
+    method: "POST",
+    url: `/articles/${article_id}/comments`,
+    data: data,
+  })
+    .then((response) => response.data.comment.body)
+    .catch((error) => console.log(error));
+};
