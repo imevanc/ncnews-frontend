@@ -4,10 +4,13 @@ import ArticleLargeView from "./ArticleLargeView";
 import Grid from "@mui/material/Grid";
 import LinearProgressWithColor from "./LinearProgressWithColor";
 import * as api from "../api";
+import { useParams } from "react-router-dom";
 
-const ArticlesBlock = (props) => {
+const ArticlesBlock = () => {
+  const { topic } = useParams();
   const [articles, setArticles] = useState([]);
-  const tab = "home" ? null : props.option;
+  const tab = topic === "all" ? null : topic;
+
   useEffect(() => {
     const fetchArticles = async (tab) => {
       return api

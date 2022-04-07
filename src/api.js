@@ -17,9 +17,9 @@ export const getTopics = async () => {
 
 // get articles
 export const getArticles = async (
+  topic,
   sort_by = "created_at",
-  order = "desc",
-  topic
+  order = "desc"
 ) => {
   const params = topic
     ? {
@@ -31,6 +31,7 @@ export const getArticles = async (
         sort_by: sort_by,
         order: order,
       };
+
   return api({
     method: "get",
     url: "/articles",

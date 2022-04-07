@@ -43,7 +43,7 @@ const App = () => {
           <NavBar topics={topics} />
           <Routes>
             <Route path="/" element={<WebInfo />} />
-            <Route path="/:topic" element={<ArticlesBlock topics={topics} />} />
+            <Route path="/:topic" element={<ArticlesBlock />} />
             <Route path="/articles/:article_id" element={<ArticleCard />} />
           </Routes>
           <Footer />
