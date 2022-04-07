@@ -94,6 +94,7 @@ const NavBar = (props) => {
 
             <Box
               display="flex"
+              justifyContent="space-between"
               sx={{
                 flexGrow: 1,
                 display: { xs: "none", md: "flex" },

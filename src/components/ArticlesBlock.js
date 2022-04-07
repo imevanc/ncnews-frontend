@@ -27,6 +27,7 @@ const ArticlesBlock = () => {
 
   return (
     <Container maxWidth="xl">
+      {/* TODO: Filters here */}
       <Grid container spacing={5}>
         {articles.length ? (
           articles.map((anArticle, idx) => {
