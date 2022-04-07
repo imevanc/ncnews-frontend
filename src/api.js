@@ -22,7 +22,7 @@ export const getArticles = async () => {
     url: "/articles",
     params: {
       sort_by: "created_at",
-      order: "DESC",
+      order: "desc",
     },
   })
     .then((response) => response.data)
@@ -31,13 +31,12 @@ export const getArticles = async () => {
 
 // get articles by topic
 export const getArticlesByTopic = async (aTopic) => {
-  console.log("api topic", aTopic);
   return api({
     method: "get",
     url: "/articles",
     params: {
       sort_by: "created_at",
-      order: "DESC",
+      order: "desc",
       topic: `${aTopic}`,
     },
   })

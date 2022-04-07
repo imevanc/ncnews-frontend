@@ -41,25 +41,8 @@ const App = () => {
           <NavBar topics={topics} />
           <Routes>
             <Route path="/" element={<ArticlesBlock />} />
-            {topics.map((topic, idx) => {
-              return (
-                <Route
-                  key={idx}
-                  path={`/${topic}`}
-                  element={<ArticlesByTopic topic={topic} />}
-                />
-              );
-            })}
+            <Route path={"/:topic"} element={<ArticlesByTopic />} />
             <Route path="/articles/:article_id" element={<ArticleCard />} />
-            {/* {values.map((value, idx) => {
-              return (
-                <Route
-                  key={idx}
-                  path={`/${value}`}
-                  element={<SortArticles sort={value} />}
-                />
-              );
-            })} */}
           </Routes>
           <Footer />
         </ThemeProvider>

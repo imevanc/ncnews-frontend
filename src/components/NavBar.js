@@ -65,11 +65,12 @@ const NavBar = (props) => {
                   display: { md: "none" },
                 }}
               >
-                {props.topics.map((aTopic) => (
+                {props.topics.map((aTopic, idx) => (
                   <MenuItem
-                    key={aTopic}
+                    key={idx}
                     component={Link}
                     to={`/${aTopic}`}
+                    state={aTopic}
                     onClick={handleCloseNavMenu}
                   >
                     <Typography
@@ -88,7 +89,6 @@ const NavBar = (props) => {
 
             <Box
               display="flex"
-              // justifyContent="space-between"
               sx={{
                 flexGrow: 1,
                 display: { xs: "none", md: "flex" },
@@ -99,6 +99,7 @@ const NavBar = (props) => {
                   <Button
                     component={Link}
                     to={`/${aTopic}`}
+                    state={aTopic}
                     size="small"
                     type="submit"
                     key={idx}
