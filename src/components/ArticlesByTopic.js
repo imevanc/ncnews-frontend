@@ -9,17 +9,20 @@ const ArticlesByTopic = (props) => {
   const [articles, setArticles] = useState([]);
 
   useEffect(() => {
-    const fetchArticles = async (aTopic) => {
+    const fetchArticlesByTopic = async (aTopic) => {
+      console.log("topic", aTopic);
       return api
-        .getArticles(aTopic)
+        .getArticlesByTopic(aTopic)
         .then((res) => {
+          console.log("topic", aTopic);
+          console.log("res", res);
           return res;
         })
         .then((fetchedArticles) => {
-          setArticles([...fetchedArticles.articles]);
+          setArticles(fetchedArticles.articles);
         });
     };
-    fetchArticles(props.topic).catch((error) => console.log(error));
+    fetchArticlesByTopic(props.topic).catch((error) => console.log(error));
   }, [props.topic]);
   return (
     <Container maxWidth="xl">

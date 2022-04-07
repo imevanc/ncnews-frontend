@@ -31,6 +31,7 @@ export const getArticles = async () => {
 
 // get articles by topic
 export const getArticlesByTopic = async (aTopic) => {
+  console.log("api topic", aTopic);
   return api({
     method: "get",
     url: "/articles",

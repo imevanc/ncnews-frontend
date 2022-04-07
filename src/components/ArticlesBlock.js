@@ -5,7 +5,7 @@ import Grid from "@mui/material/Grid";
 import LinearProgressWithColor from "./LinearProgressWithColor";
 import * as api from "../api";
 
-const ArticlesBlock = (props) => {
+const ArticlesBlock = () => {
   const [articles, setArticles] = useState([]);
 
   useEffect(() => {
