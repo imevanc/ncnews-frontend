@@ -16,29 +16,25 @@ export const getTopics = async () => {
 };
 
 // get articles
-export const getArticles = async () => {
+export const getArticles = async (
+  sort_by = "created_at",
+  order = "desc",
+  topic
+) => {
+  const params = topic
+    ? {
+        sort_by: sort_by,
+        order: order,
+        topic: topic,
+      }
+    : {
+        sort_by: sort_by,
+        order: order,
+      };
   return api({
     method: "get",
     url: "/articles",
-    params: {
-      sort_by: "created_at",
-      order: "desc",
-    },
-  })
-    .then((response) => response.data)
-    .catch((error) => console.log(error));
-};
-
-// get articles by topic
-export const getArticlesByTopic = async (aTopic) => {
-  return api({
-    method: "get",
-    url: "/articles",
-    params: {
-      sort_by: "created_at",
-      order: "desc",
-      topic: `${aTopic}`,
-    },
+    params: params,
   })
     .then((response) => response.data)
     .catch((error) => console.log(error));

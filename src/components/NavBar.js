@@ -13,7 +13,7 @@ import Button from "@mui/material/Button";
 import { useContext } from "react";
 import { ThemeContext } from "../theme/ThemeContext";
 import { Link } from "react-router-dom";
-import Sort from "./Sort";
+import LinearProgress from "@mui/material/LinearProgress";
 
 const NavBar = (props) => {
   const ourTheme = useContext(ThemeContext);
@@ -65,25 +65,30 @@ const NavBar = (props) => {
                   display: { md: "none" },
                 }}
               >
-                {props.topics.map((aTopic, idx) => (
-                  <MenuItem
-                    key={idx}
-                    component={Link}
-                    to={`/${aTopic}`}
-                    state={aTopic}
-                    onClick={handleCloseNavMenu}
-                  >
-                    <Typography
-                      textAlign="center"
-                      sx={{
-                        spacing: 10,
-                        fontSize: ourTheme.ourTheme.palette.typography.fontSize,
-                      }}
+                {props.topics.length === 4 ? (
+                  props.topics.map((aTopic, idx) => (
+                    <MenuItem
+                      key={idx}
+                      component={Link}
+                      to={`/${aTopic}`}
+                      state={aTopic}
+                      onClick={handleCloseNavMenu}
                     >
-                      <span value={aTopic}>{aTopic}</span>
-                    </Typography>
-                  </MenuItem>
-                ))}
+                      <Typography
+                        textAlign="center"
+                        sx={{
+                          spacing: 10,
+                          fontSize:
+                            ourTheme.ourTheme.palette.typography.fontSize,
+                        }}
+                      >
+                        <span value={aTopic}>{aTopic}</span>
+                      </Typography>
+                    </MenuItem>
+                  ))
+                ) : (
+                  <LinearProgress sx={{ color: "white" }} />
+                )}
               </Menu>
             </Box>
 
@@ -94,26 +99,29 @@ const NavBar = (props) => {
                 display: { xs: "none", md: "flex" },
               }}
             >
-              {props.topics.map((aTopic, idx) => {
-                return (
-                  <Button
-                    component={Link}
-                    to={`/${aTopic}`}
-                    state={aTopic}
-                    size="small"
-                    type="submit"
-                    key={idx}
-                    sx={{
-                      fontSize: ourTheme.ourTheme.palette.button.fontSize,
-                      color: ourTheme.ourTheme.palette.button.primary.main,
-                    }}
-                  >
-                    <span value={aTopic}>{aTopic}</span>
-                  </Button>
-                );
-              })}
+              {props.topics.length === 4 ? (
+                props.topics.map((aTopic, idx) => {
+                  return (
+                    <Button
+                      component={Link}
+                      to={`/${aTopic}`}
+                      state={aTopic}
+                      size="small"
+                      type="submit"
+                      key={idx}
+                      sx={{
+                        fontSize: ourTheme.ourTheme.palette.button.fontSize,
+                        color: ourTheme.ourTheme.palette.button.primary.main,
+                      }}
+                    >
+                      <span value={aTopic}>{aTopic}</span>
+                    </Button>
+                  );
+                })
+              ) : (
+                <LinearProgress sx={{ color: "white" }} />
+              )}
             </Box>
-            <Sort />
           </Toolbar>
         </Container>
       </AppBar>
