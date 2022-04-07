@@ -9,15 +9,13 @@ import { useState, useEffect } from "react";
 import { ThemeContext } from "./theme/ThemeContext";
 import * as api from "./api";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import ArticlesByTopic from "./components/ArticlesByTopic";
 import ArticleCard from "./components/ArticleCard";
-
-const values = ["created_at", "title", "author", "votes"];
+import WebInfo from "./components/WebInfo";
 
 const App = () => {
   const [ourMode, setOurMode] = useState("light");
   const ourTheme = Theme(ourMode);
-  const [topics, setTopics] = useState([]);
+  const [topics, setTopics] = useState(["all"]);
   useEffect(() => {
     const fetchTopics = async () => {
       return api
@@ -25,9 +23,13 @@ const App = () => {
         .then((res) => {
           return res;
         })
-        .then((topics) => {
-          const newTopics = topics.topics.map((aTopic) => aTopic.slug);
-          setTopics(newTopics);
+        .then((fetchedTopics) => {
+          const newTopics = fetchedTopics.topics.map((aTopic) => aTopic.slug);
+          setTopics((topics) => {
+            return topics.length === 4
+              ? ["all", ...newTopics]
+              : [...topics, ...newTopics];
+          });
         });
     };
     fetchTopics().catch((error) => console.log(error));
@@ -40,8 +42,8 @@ const App = () => {
           <Header ourMode={ourMode} setOurMode={setOurMode} />
           <NavBar topics={topics} />
           <Routes>
-            <Route path="/" element={<ArticlesBlock />} />
-            <Route path={"/:topic"} element={<ArticlesByTopic />} />
+            <Route path="/" element={<WebInfo />} />
+            <Route path="/:topic" element={<ArticlesBlock />} />
             <Route path="/articles/:article_id" element={<ArticleCard />} />
           </Routes>
           <Footer />

@@ -4,14 +4,17 @@ import ArticleLargeView from "./ArticleLargeView";
 import Grid from "@mui/material/Grid";
 import LinearProgressWithColor from "./LinearProgressWithColor";
 import * as api from "../api";
+import { useParams } from "react-router-dom";
 
 const ArticlesBlock = () => {
+  const { topic } = useParams();
   const [articles, setArticles] = useState([]);
+  const tab = topic === "all" ? null : topic;
 
   useEffect(() => {
-    const fetchArticles = async () => {
+    const fetchArticles = async (tab) => {
       return api
-        .getArticles()
+        .getArticles(tab)
         .then((res) => {
           return res;
         })
@@ -19,8 +22,8 @@ const ArticlesBlock = () => {
           setArticles(fetchedArticles.articles);
         });
     };
-    fetchArticles().catch((error) => console.log(error));
-  }, []);
+    fetchArticles(tab).catch((error) => console.log(error));
+  }, [tab]);
 
   return (
     <Container maxWidth="xl">
