@@ -1,4 +1,3 @@
-import "./App.css";
 import Header from "./components/Header";
 import NavBar from "./components/NavBar";
 import ArticlesBlock from "./components/ArticlesBlock";
@@ -10,7 +9,6 @@ import { useState, useEffect } from "react";
 import { ThemeContext } from "./theme/ThemeContext";
 import * as api from "./api";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import LinearProgressWithColor from "./components/LinearProgressWithColor";
 import ArticlesByTopic from "./components/ArticlesByTopic";
 import ArticleCard from "./components/ArticleCard";
 
@@ -42,35 +40,9 @@ const App = () => {
           <Header ourMode={ourMode} setOurMode={setOurMode} />
           <NavBar topics={topics} />
           <Routes>
-            <Route
-              path="/"
-              element={
-                topics.length ? (
-                  <ArticlesBlock topics={topics} />
-                ) : (
-                  <LinearProgressWithColor />
-                )
-              }
-            />
-            {topics.map((topic, idx) => {
-              return (
-                <Route
-                  key={idx}
-                  path={`/${topic}`}
-                  element={<ArticlesByTopic topic={topic} />}
-                />
-              );
-            })}
+            <Route path="/" element={<ArticlesBlock />} />
+            <Route path={"/:topic"} element={<ArticlesByTopic />} />
             <Route path="/articles/:article_id" element={<ArticleCard />} />
-            {values.map((value, idx) => {
-              return (
-                <Route
-                  key={idx}
-                  path={`/${value}`}
-                  element={<SortArticles sort={value} />}
-                />
-              );
-            })}
           </Routes>
           <Footer />
         </ThemeProvider>

@@ -4,23 +4,27 @@ import ArticleLargeView from "./ArticleLargeView";
 import Grid from "@mui/material/Grid";
 import LinearProgressWithColor from "./LinearProgressWithColor";
 import * as api from "../api";
+import { useLocation } from "react-router-dom";
 
-const ArticlesByTopic = (props) => {
+const ArticlesByTopic = () => {
+  const location = useLocation();
+  const topic = location.state;
   const [articles, setArticles] = useState([]);
 
   useEffect(() => {
-    const fetchArticles = async (aTopic) => {
+    const fetchArticlesByTopic = async (aTopic) => {
       return api
-        .getArticles(aTopic)
+        .getArticlesByTopic(aTopic)
         .then((res) => {
+          console.log(res.articles);
           return res;
         })
         .then((fetchedArticles) => {
-          setArticles([...fetchedArticles.articles]);
+          setArticles(fetchedArticles.articles);
         });
     };
-    fetchArticles(props.topic).catch((error) => console.log(error));
-  }, [props.topic]);
+    fetchArticlesByTopic(topic).catch((error) => console.log(error));
+  }, [topic]);
   return (
     <Container maxWidth="xl">
       <Grid container spacing={5}>
