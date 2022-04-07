@@ -62,7 +62,7 @@ const App = () => {
               );
             })}
             <Route path="/articles/:article_id" element={<ArticleCard />} />
-            {values.map((value, idx) => {
+            {/* {values.map((value, idx) => {
               return (
                 <Route
                   key={idx}
@@ -70,7 +70,7 @@ const App = () => {
                   element={<SortArticles sort={value} />}
                 />
               );
-            })}
+            })} */}
           </Routes>
           <Footer />
         </ThemeProvider>

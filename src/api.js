@@ -16,7 +16,21 @@ export const getTopics = async () => {
 };
 
 // get articles
-export const getArticles = async (aTopic) => {
+export const getArticles = async () => {
+  return api({
+    method: "get",
+    url: "/articles",
+    params: {
+      sort_by: "created_at",
+      order: "DESC",
+    },
+  })
+    .then((response) => response.data)
+    .catch((error) => console.log(error));
+};
+
+// get articles by topic
+export const getArticlesByTopic = async (aTopic) => {
   return api({
     method: "get",
     url: "/articles",

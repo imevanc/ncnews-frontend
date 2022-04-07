@@ -9,20 +9,19 @@ const ArticlesBlock = (props) => {
   const [articles, setArticles] = useState([]);
 
   useEffect(() => {
-    const fetchArticles = async (aTopic) => {
+    const fetchArticles = async () => {
       return api
-        .getArticles(aTopic)
+        .getArticles()
         .then((res) => {
           return res;
         })
         .then((fetchedArticles) => {
-          setArticles((articles) => [...articles, ...fetchedArticles.articles]);
+          setArticles(fetchedArticles.articles);
         });
     };
-    props.topics.forEach((aTopic) =>
-      fetchArticles(aTopic).catch((error) => console.log(error))
-    );
-  }, [props.topics]);
+    fetchArticles().catch((error) => console.log(error));
+  }, []);
+
   return (
     <Container maxWidth="xl">
       <Grid container spacing={5}>
