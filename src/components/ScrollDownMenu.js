@@ -4,7 +4,6 @@ import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import { Link } from "react-router-dom";
 
 const StyledMenu = styled((props) => (
   <Menu
@@ -49,20 +48,20 @@ const StyledMenu = styled((props) => (
   },
 }));
 
-const values = ["created_at", "title", "author", "votes"];
-
-const Sort = () => {
+const ScrollDownMenu = (props) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [query, setQuery] = React.useState(props.query);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
-  const handleClose = () => {
+  const handleClose = (event) => {
     setAnchorEl(null);
+    setQuery(event.target.getAttribute("name"));
   };
 
   return (
-    <div>
+    <React.Fragment>
       <Button
         id="demo-customized-button"
         aria-controls={open ? "demo-customized-menu" : undefined}
@@ -73,7 +72,7 @@ const Sort = () => {
         onClick={handleClick}
         endIcon={<KeyboardArrowDownIcon />}
       >
-        Sort Options
+        {query.length === 0 ? props.query : query}
       </Button>
       <StyledMenu
         id="demo-customized-menu"
@@ -84,13 +83,14 @@ const Sort = () => {
         open={open}
         onClose={handleClose}
       >
-        {values.map((value, idx) => {
+        {props.options.map((value, idx) => {
           return (
             <MenuItem
-              component={Link}
-              to={`/${value}`}
+              // component={Link}
+              // to={`/${value}`}
               key={idx}
               onClick={handleClose}
+              name={value}
               disableRipple
             >
               {value}
@@ -98,8 +98,8 @@ const Sort = () => {
           );
         })}
       </StyledMenu>
-    </div>
+    </React.Fragment>
   );
 };
 
-export default Sort;
+export default ScrollDownMenu;

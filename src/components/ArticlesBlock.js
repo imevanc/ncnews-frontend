@@ -5,7 +5,6 @@ import Grid from "@mui/material/Grid";
 import LinearProgressWithColor from "./LinearProgressWithColor";
 import * as api from "../api";
 import { useParams } from "react-router-dom";
-import FiltersBar from "./FiltersBar";
 
 const ArticlesBlock = () => {
   const { topic } = useParams();
