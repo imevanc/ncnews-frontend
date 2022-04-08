@@ -14,6 +14,8 @@ import { useContext } from "react";
 import { ThemeContext } from "../theme/ThemeContext";
 import { Link } from "react-router-dom";
 import LinearProgress from "@mui/material/LinearProgress";
+import Grid from "@mui/material/Grid";
+import FiltersBar from "./FiltersBar";
 
 const NavBar = (props) => {
   const ourTheme = useContext(ThemeContext);
@@ -126,6 +128,8 @@ const NavBar = (props) => {
           </Toolbar>
         </Container>
       </AppBar>
+
+      <FiltersBar />
     </Container>
   );
 };

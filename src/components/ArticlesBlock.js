@@ -5,6 +5,7 @@ import Grid from "@mui/material/Grid";
 import LinearProgressWithColor from "./LinearProgressWithColor";
 import * as api from "../api";
 import { useParams } from "react-router-dom";
+import FiltersBar from "./FiltersBar";
 
 const ArticlesBlock = () => {
   const { topic } = useParams();
@@ -26,8 +27,7 @@ const ArticlesBlock = () => {
   }, [tab]);
 
   return (
-    <Container maxWidth="xl">
-      {/* TODO: Filters here */}
+    <Container maxWidth="xl" sx={{ paddingTop: "15px" }}>
       <Grid container spacing={5}>
         {articles.length ? (
           articles.map((anArticle, idx) => {
