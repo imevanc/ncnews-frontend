@@ -99,6 +99,7 @@ const FiltersBar = () => {
                 ))}
               </Menu>
             </Box>
+
             <Box
               display="flex"
               justifyContent="space-between"
@@ -107,27 +108,30 @@ const FiltersBar = () => {
                 display: { xs: "none", md: "flex" },
               }}
             >
-              {scrollbars.map((option) => {
-                return option;
-              })}
-            </Box>
-
-            <Grid container spacing={3}>
-              <Grid item xs={6}>
-                <Button
-                  variant="contained"
-                  type="submit"
-                  onClick={handleSubmit}
-                  sx={{
-                    flexGrow: 1,
-                    display: { xs: "none", md: "flex" },
-                    color: ourTheme.ourTheme.palette.text.main,
-                  }}
-                >
-                  Go
-                </Button>
+              <Grid container spacing={6}>
+                {scrollbars.map((option, idx) => {
+                  return (
+                    <Grid key={idx} item xs={3}>
+                      {option}
+                    </Grid>
+                  );
+                })}
+                <Grid item xs={3}>
+                  <Button
+                    variant="contained"
+                    type="submit"
+                    onClick={handleSubmit}
+                    sx={{
+                      flexGrow: 1,
+                      display: { xs: "none", md: "flex" },
+                      color: ourTheme.ourTheme.palette.text.main,
+                    }}
+                  >
+                    Submit
+                  </Button>
+                </Grid>
               </Grid>
-            </Grid>
+            </Box>
           </Toolbar>
         </Container>
       </AppBar>
