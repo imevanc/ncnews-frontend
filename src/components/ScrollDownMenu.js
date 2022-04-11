@@ -57,6 +57,15 @@ const ScrollDownMenu = (props) => {
   };
   const handleClose = (event) => {
     setAnchorEl(null);
+    props.query === "sort_by"
+      ? props.setSelected({
+          order: props.selected["order"],
+          sortBy: event.target.getAttribute("name"),
+        })
+      : props.setSelected({
+          sortBy: props.selected["sortBy"],
+          order: event.target.getAttribute("name"),
+        });
     setQuery(event.target.getAttribute("name"));
   };
 
@@ -72,7 +81,7 @@ const ScrollDownMenu = (props) => {
         onClick={handleClick}
         endIcon={<KeyboardArrowDownIcon />}
       >
-        {query.length === 0 ? props.query : query}
+        {query ? query : props.query}
       </Button>
       <StyledMenu
         id="demo-customized-menu"
@@ -86,8 +95,6 @@ const ScrollDownMenu = (props) => {
         {props.options.map((value, idx) => {
           return (
             <MenuItem
-              // component={Link}
-              // to={`/${value}`}
               key={idx}
               onClick={handleClose}
               name={value}

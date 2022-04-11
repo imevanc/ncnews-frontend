@@ -10,19 +10,30 @@ import { ThemeContext } from "../theme/ThemeContext";
 import Box from "@mui/material/Box";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import Button from "@mui/material/Button";
 import ScrollDownMenu from "./ScrollDownMenu";
-
-const sortByOptions = ["created_at", "title", "author", "votes"];
-const orderOption = ["asc", "desc"];
-
-const scrollbars = [
-  <ScrollDownMenu query={"sort_by"} options={sortByOptions} />,
-  <ScrollDownMenu query={"order"} options={orderOption} />,
-];
+import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
 
 const FiltersBar = () => {
   const ourTheme = useContext(ThemeContext);
+  const [selected, setSelected] = useState({ sortBy: null, order: null });
+  const sortByOptions = ["created_at", "title", "author", "votes"];
+  const orderOption = ["asc", "desc"];
+
+  const scrollbars = [
+    <ScrollDownMenu
+      query={"sort_by"}
+      options={sortByOptions}
+      selected={selected}
+      setSelected={setSelected}
+    />,
+    <ScrollDownMenu
+      query={"order"}
+      options={orderOption}
+      selected={selected}
+      setSelected={setSelected}
+    />,
+  ];
   const [anchorElNav, setAnchorElNav] = useState(null);
 
   const handleOpenNavMenu = (event) => {
@@ -31,8 +42,11 @@ const FiltersBar = () => {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
+  const handleSubmit = () => {
+    console.log(selected);
+  };
   return (
-    <Container maxWidth="md" sx={{ paddingTop: "5px" }}>
+    <Container maxWidth="xs" sx={{ paddingTop: "5px" }}>
       <AppBar
         position="static"
         sx={{
@@ -71,13 +85,7 @@ const FiltersBar = () => {
                 }}
               >
                 {scrollbars.map((option, idx) => (
-                  <MenuItem
-                    key={idx}
-                    // component={Link}
-                    // to={`/${aTopic}`}
-                    // state={aTopic}
-                    onClick={handleCloseNavMenu}
-                  >
+                  <MenuItem key={idx} onClick={handleCloseNavMenu}>
                     <Typography
                       textAlign="center"
                       sx={{
@@ -99,25 +107,27 @@ const FiltersBar = () => {
                 display: { xs: "none", md: "flex" },
               }}
             >
-              {scrollbars.map((option, idx) => {
+              {scrollbars.map((option) => {
                 return option;
-                //   <MenuItem
-                //     onClick={() => console.log(option)}
-                //     // component={Link}
-                //     // to={`/${aTopic}`}
-                //     // state={aTopic}
-                //     size="small"
-                //     type="submit"
-                //     key={idx}
-                //     sx={{
-                //       fontSize: ourTheme.ourTheme.palette.button.fontSize,
-                //       color: ourTheme.ourTheme.palette.button.primary.main,
-                //     }}
-                //   >
-                //     <span value={option}>{option}</span>
-                //   </MenuItem>
               })}
             </Box>
+
+            <Grid container spacing={3}>
+              <Grid item xs={6}>
+                <Button
+                  variant="contained"
+                  type="submit"
+                  onClick={handleSubmit}
+                  sx={{
+                    flexGrow: 1,
+                    display: { xs: "none", md: "flex" },
+                    color: ourTheme.ourTheme.palette.text.main,
+                  }}
+                >
+                  Go
+                </Button>
+              </Grid>
+            </Grid>
           </Toolbar>
         </Container>
       </AppBar>
