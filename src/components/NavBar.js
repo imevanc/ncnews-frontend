@@ -19,6 +19,7 @@ import FiltersBar from "./FiltersBar";
 const NavBar = (props) => {
   const ourTheme = useContext(ThemeContext);
   const [anchorElNav, setAnchorElNav] = useState(null);
+  const [selectedTopic, setSelectedTopic] = useState(null);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -26,7 +27,9 @@ const NavBar = (props) => {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
-
+  const handleClick = (event) => {
+    setSelectedTopic(event.currentTarget.textContent);
+  };
   return (
     <Container maxWidth="xl" sx={{ paddingTop: "50px" }}>
       <AppBar
@@ -83,7 +86,7 @@ const NavBar = (props) => {
                             ourTheme.ourTheme.palette.typography.fontSize,
                         }}
                       >
-                        <span value={aTopic}>{aTopic}</span>
+                        {aTopic}
                       </Typography>
                     </MenuItem>
                   ))
@@ -106,9 +109,10 @@ const NavBar = (props) => {
                   return (
                     <Button
                       component={Link}
-                      to={`/${aTopic}`}
+                      to={`/${aTopic}?order=desc&sort_by=created_at`}
                       state={aTopic}
                       size="small"
+                      onClick={handleClick}
                       type="submit"
                       key={idx}
                       sx={{
@@ -116,7 +120,7 @@ const NavBar = (props) => {
                         color: ourTheme.ourTheme.palette.button.primary.main,
                       }}
                     >
-                      <span value={aTopic}>{aTopic}</span>
+                      {aTopic}
                     </Button>
                   );
                 })
@@ -127,8 +131,7 @@ const NavBar = (props) => {
           </Toolbar>
         </Container>
       </AppBar>
-
-      <FiltersBar />
+      <FiltersBar selectedTopic={selectedTopic} />
     </Container>
   );
 };

@@ -7,6 +7,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import { useContext, useState } from "react";
 import { ThemeContext } from "../theme/ThemeContext";
+import { Link } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
@@ -14,12 +15,11 @@ import ScrollDownMenu from "./ScrollDownMenu";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 
-const FiltersBar = () => {
+const FiltersBar = (props) => {
   const ourTheme = useContext(ThemeContext);
-  const [selected, setSelected] = useState({ sortBy: null, order: null });
+  const [selected, setSelected] = useState({ sortBy: " ", order: " " });
   const sortByOptions = ["created_at", "title", "author", "votes"];
   const orderOption = ["asc", "desc"];
-
   const scrollbars = [
     <ScrollDownMenu
       query={"sort_by"}
@@ -41,9 +41,6 @@ const FiltersBar = () => {
   };
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
-  };
-  const handleSubmit = () => {
-    console.log(selected);
   };
   return (
     <Container maxWidth="xs" sx={{ paddingTop: "5px" }}>
@@ -117,18 +114,33 @@ const FiltersBar = () => {
                   );
                 })}
                 <Grid item xs={3}>
-                  <Button
-                    variant="contained"
-                    type="submit"
-                    onClick={handleSubmit}
-                    sx={{
-                      flexGrow: 1,
-                      display: { xs: "none", md: "flex" },
-                      color: ourTheme.ourTheme.palette.text.main,
-                    }}
-                  >
-                    Submit
-                  </Button>
+                  {props.selectedTopic && Object.keys(selected).length ? (
+                    <Button
+                      component={Link}
+                      to={`/${props.selectedTopic}?order=${selected.order}&sort_by=${selected.sortBy}`}
+                      variant="contained"
+                      type="submit"
+                      sx={{
+                        flexGrow: 1,
+                        display: { xs: "none", md: "flex" },
+                        color: ourTheme.ourTheme.palette.text.main,
+                      }}
+                    >
+                      Submit
+                    </Button>
+                  ) : (
+                    <Button
+                      variant="contained"
+                      type="submit"
+                      sx={{
+                        flexGrow: 1,
+                        display: { xs: "none", md: "flex" },
+                        color: ourTheme.ourTheme.palette.text.main,
+                      }}
+                    >
+                      Submit
+                    </Button>
+                  )}
                 </Grid>
               </Grid>
             </Box>
