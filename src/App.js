@@ -10,7 +10,6 @@ import { ThemeContext } from "./theme/ThemeContext";
 import * as api from "./api";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ArticleCard from "./components/ArticleCard";
-import WebInfo from "./components/WebInfo";
 
 const App = () => {
   const [ourMode, setOurMode] = useState("light");
@@ -42,7 +41,7 @@ const App = () => {
           <Header ourMode={ourMode} setOurMode={setOurMode} />
           <NavBar topics={topics} />
           <Routes>
-            <Route path="/" element={<WebInfo />} />
+            <Route path="/" element={<ArticlesBlock topic={"all"} />} />
             <Route path="/:topic" element={<ArticlesBlock />} />
             <Route path="/articles/:article_id" element={<ArticleCard />} />
           </Routes>

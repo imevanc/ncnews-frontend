@@ -4,17 +4,22 @@ import ArticleLargeView from "./ArticleLargeView";
 import Grid from "@mui/material/Grid";
 import LinearProgressWithColor from "./LinearProgressWithColor";
 import * as api from "../api";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 
-const ArticlesBlock = () => {
-  const { topic } = useParams();
+const ArticlesBlock = (props) => {
+  const params = useParams();
+  const topic = props.topic ? props.topic : params.topic;
   const [articles, setArticles] = useState([]);
+  const { search } = useLocation();
+  const searchParams = new URLSearchParams(search);
+  const order = searchParams.get("order");
+  const sortBy = searchParams.get("sort_by");
   const tab = topic === "all" ? null : topic;
 
   useEffect(() => {
-    const fetchArticles = async (tab) => {
+    const fetchArticles = async (tab, sortBy, order) => {
       return api
-        .getArticles(tab)
+        .getArticles(tab, sortBy, order)
         .then((res) => {
           return res;
         })
@@ -22,12 +27,11 @@ const ArticlesBlock = () => {
           setArticles(fetchedArticles.articles);
         });
     };
-    fetchArticles(tab).catch((error) => console.log(error));
-  }, [tab]);
+    fetchArticles(tab, sortBy, order).catch((error) => console.log(error));
+  }, [tab, sortBy, order]);
 
   return (
-    <Container maxWidth="xl">
-      {/* TODO: Filters here */}
+    <Container maxWidth="xl" sx={{ paddingTop: "15px" }}>
       <Grid container spacing={5}>
         {articles.length ? (
           articles.map((anArticle, idx) => {
