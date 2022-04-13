@@ -37,7 +37,10 @@ export const getArticles = async (
     url: "/articles",
     params: params,
   })
-    .then((response) => response.data)
+    .then((response) => {
+      console.log("getArticles", response.data);
+      return response.data;
+    })
     .catch((error) => console.log(error));
 };
 
@@ -46,7 +49,9 @@ export const getCommentsByArticleId = async (article_id) => {
     method: "get",
     url: `/articles/${article_id}/comments`,
   })
-    .then((response) => response.data)
+    .then((response) => {
+      return response.data;
+    })
     .catch((error) => console.log(error));
 };
 
@@ -75,6 +80,8 @@ export const postCommentByArticleId = async (article_id, data) => {
     url: `/articles/${article_id}/comments`,
     data: data,
   })
-    .then((response) => response.data.comment.body)
+    .then((response) => {
+      return response.data;
+    })
     .catch((error) => console.log(error));
 };

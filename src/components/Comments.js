@@ -13,7 +13,8 @@ const Comments = (props) => {
       return api
         .getCommentsByArticleId(article_id)
         .then((res) => {
-          return res.comments.body;
+          console.log(res);
+          return res;
         })
         .then((comment) => {
           const newComment = comment;
@@ -25,18 +26,26 @@ const Comments = (props) => {
     });
   }, [props.article_id]);
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const postData = async (article_id, comment) => {
-      setComment((comment) => comment + " " + data.get("Comment") + ".");
-      await api.postCommentByArticleId(article_id, {
-        username: "tickle122",
-        body: data.get("Comment"),
-      });
-    };
-    postData(props.article_id, comment).catch((error) => console.log(error));
+  const handleSubmit = () => {
+    console.log("submitted");
   };
+
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   const data = new FormData(event.currentTarget);
+  //   const postData = async (article_id, comment) => {
+  //     await api
+  //       .postCommentByArticleId(article_id, {
+  //         username: `${props.author}`,
+  //         body: data.get("Comment"),
+  //       })
+  //       .then((res) => res.comment.body)
+  //       .then((comment) => {
+  //         setComment((comment) => comment + " " + data.get("Comment") + ".");
+  //       });
+  //   };
+  //   postData(props.article_id, comment).catch((error) => console.log(error));
+  // };
   const evalLengthOfComment = Object.keys(comment).length;
   return (
     <Box
@@ -47,23 +56,7 @@ const Comments = (props) => {
       <Box sx={{ color: "text.secondary" }}>
         Comments:
         {evalLengthOfComment ? (
-          <React.Fragment>
-            {
-              <dl>
-                {comment.split(".").map((aComment, idx) => {
-                  if (idx !== comment.split(".").length - 1) {
-                    if (aComment[0] === " ") {
-                      return <dt key={idx}>-- {aComment.slice(1)}</dt>;
-                    } else {
-                      return <dt key={idx}>-- {aComment}</dt>;
-                    }
-                  } else {
-                    return undefined;
-                  }
-                })}
-              </dl>
-            }
-          </React.Fragment>
+          <React.Fragment></React.Fragment>
         ) : (
           <LinearProgressWithColor />
         )}
