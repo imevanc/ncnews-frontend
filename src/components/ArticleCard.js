@@ -9,6 +9,7 @@ import LinearProgressWithColor from "./LinearProgressWithColor";
 import VoteIcon from "./VoteIcon";
 import CardActions from "@mui/material/CardActions";
 import Comments from "./Comments";
+import Paper from "@mui/material/Paper";
 
 const ArticleCard = () => {
   const [article, setArticle] = useState("");
@@ -34,8 +35,11 @@ const ArticleCard = () => {
 
   const evalLengthOfArticle = Object.keys(article).length;
   return (
-    <Container maxWidth="xl">
+    <Container maxWidth="xl" sx={{ paddingTop: "10px" }}>
       <Card
+        component={Paper}
+        elevation={10}
+        bgcolor="grey"
         sx={{
           height: "100%",
           display: "flex",
