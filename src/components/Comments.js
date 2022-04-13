@@ -11,6 +11,7 @@ import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
 import Paper from "@mui/material/Paper";
 import Container from "@mui/material/Container";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 
 const Comments = (props) => {
   const [comments, setComments] = React.useState("");
@@ -31,6 +32,25 @@ const Comments = (props) => {
     });
   }, [props.article_id]);
 
+  const handleDelete = (event) => {
+    event.preventDefault();
+    const comment_id = event.currentTarget.getAttribute("comment_id");
+    const deleteData = async (comment_id) => {
+      await api.deleteCommentByCommentId(comment_id).then((res) => {
+        if (res.status === 204) {
+          const newComments = comments.reduce((filteredComments, comment) => {
+            if (comment.comment_id !== Number(comment_id)) {
+              filteredComments.push(comment);
+            }
+            return filteredComments;
+          }, []);
+          setComments(newComments);
+        }
+      });
+    };
+    deleteData(comment_id).catch((error) => console.log(error));
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -43,6 +63,7 @@ const Comments = (props) => {
         .then((res) => res.comment)
         .then((comment) => {
           setComments([...comments, comment]);
+          document.getElementById("Comment").nextSibling.nodeValue = "";
         });
     };
     postData(props.article_id, comments).catch((error) => console.log(error));
@@ -96,6 +117,9 @@ const Comments = (props) => {
                     component={Paper}
                     elevation={7}
                     bgcolor="grey"
+                    id="comment_card"
+                    label="comment_card"
+                    name="comment_card"
                     sx={{
                       height: "100%",
                       display: "flex",
@@ -130,9 +154,39 @@ const Comments = (props) => {
                     </CardContent>
                     <CardActions>
                       {evalLengthOfComment ? (
-                        <Box sx={{ color: "text.secondary" }}>
-                          Total Votes: {comment.votes}
-                        </Box>
+                        <React.Fragment>
+                          <Grid container spacing={3}>
+                            <Grid item xs={9}>
+                              <Box
+                                sx={{
+                                  color: "text.secondary",
+                                }}
+                              >
+                                Total Votes: {comment.votes}
+                              </Box>
+                            </Grid>
+                            <Grid item xs={3}>
+                              <Box
+                                sx={{
+                                  color: "text.secondary",
+                                }}
+                              >
+                                <Button
+                                  comment_id={comment.comment_id}
+                                  onClick={handleDelete}
+                                  variant="outlined"
+                                  color="secondary"
+                                  sx={{ mt: 1, mb: 2 }}
+                                >
+                                  <DeleteForeverIcon
+                                    color="white"
+                                    aria-label="edit"
+                                  />
+                                </Button>
+                              </Box>
+                            </Grid>
+                          </Grid>
+                        </React.Fragment>
                       ) : (
                         <LinearProgressWithColor />
                       )}
