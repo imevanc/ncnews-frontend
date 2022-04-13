@@ -5,20 +5,24 @@ import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import React from "react";
 import LinearProgressWithColor from "./LinearProgressWithColor";
+import Typography from "@mui/material/Typography";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardActions from "@mui/material/CardActions";
+import VoteIcon from "./VoteIcon";
 
 const Comments = (props) => {
-  const [comment, setComment] = React.useState("");
+  const [comments, setComments] = React.useState("");
   React.useEffect(() => {
     const fetchCommentsByArticleId = async (article_id) => {
       return api
         .getCommentsByArticleId(article_id)
         .then((res) => {
-          console.log(res);
-          return res;
+          return res.comments;
         })
         .then((comment) => {
           const newComment = comment;
-          setComment(newComment);
+          setComments(newComment);
         });
     };
     fetchCommentsByArticleId(props.article_id).catch((error) => {
@@ -46,7 +50,7 @@ const Comments = (props) => {
   //   };
   //   postData(props.article_id, comment).catch((error) => console.log(error));
   // };
-  const evalLengthOfComment = Object.keys(comment).length;
+  const evalLengthOfComment = Object.keys(comments).length;
   return (
     <Box
       sx={{
@@ -56,7 +60,57 @@ const Comments = (props) => {
       <Box sx={{ color: "text.secondary" }}>
         Comments:
         {evalLengthOfComment ? (
-          <React.Fragment></React.Fragment>
+          <React.Fragment>
+            {comments.map((comment, idx) => {
+              return (
+                <Card
+                  key={idx}
+                  sx={{
+                    height: "100%",
+                    display: "flex",
+                    flexDirection: "column",
+                  }}
+                >
+                  <CardContent sx={{ flexGrow: 1, align: "center" }}>
+                    <Typography gutterBottom variant="h6" component="h2">
+                      {evalLengthOfComment ? (
+                        <dl>
+                          <dt>Comment ID: {comment.comment_id}</dt>
+                          <dt>Comment Body: {comment.body}</dt>
+                        </dl>
+                      ) : (
+                        <LinearProgressWithColor />
+                      )}
+                    </Typography>
+                    <Typography sx={{ align: "right" }} component="div">
+                      {evalLengthOfComment ? (
+                        <div>
+                          {comment.created_at
+                            .split("T")[0]
+                            .split("-")
+                            .reverse()
+                            .join("-")}{" "}
+                          by {comment.author}
+                        </div>
+                      ) : (
+                        <LinearProgressWithColor />
+                      )}
+                    </Typography>
+                  </CardContent>
+                  <CardActions>
+                    {evalLengthOfComment ? (
+                      <VoteIcon
+                        votes={comment.votes}
+                        article_id={comment.comment_id}
+                      />
+                    ) : (
+                      <LinearProgressWithColor />
+                    )}
+                  </CardActions>
+                </Card>
+              );
+            })}
+          </React.Fragment>
         ) : (
           <LinearProgressWithColor />
         )}

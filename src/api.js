@@ -38,7 +38,6 @@ export const getArticles = async (
     params: params,
   })
     .then((response) => {
-      console.log("getArticles", response.data);
       return response.data;
     })
     .catch((error) => console.log(error));
