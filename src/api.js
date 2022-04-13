@@ -84,3 +84,14 @@ export const postCommentByArticleId = async (article_id, data) => {
     })
     .catch((error) => console.log(error));
 };
+
+export const deleteCommentByCommentId = async (comment_id) => {
+  return api({
+    method: "DELETE",
+    url: `/comments/${comment_id}`,
+  })
+    .then((response) => {
+      return response;
+    })
+    .catch((error) => console.log(error));
+};
