@@ -9,7 +9,8 @@ import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
-import VoteIcon from "./VoteIcon";
+import Paper from "@mui/material/Paper";
+import Container from "@mui/material/Container";
 
 const Comments = (props) => {
   const [comments, setComments] = React.useState("");
@@ -30,26 +31,22 @@ const Comments = (props) => {
     });
   }, [props.article_id]);
 
-  const handleSubmit = () => {
-    console.log("submitted");
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    const postData = async (article_id, comment) => {
+      await api
+        .postCommentByArticleId(article_id, {
+          username: `happyamy2016`,
+          body: data.get("Comment"),
+        })
+        .then((res) => res.comment)
+        .then((comment) => {
+          setComments([...comments, comment]);
+        });
+    };
+    postData(props.article_id, comments).catch((error) => console.log(error));
   };
-
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   const data = new FormData(event.currentTarget);
-  //   const postData = async (article_id, comment) => {
-  //     await api
-  //       .postCommentByArticleId(article_id, {
-  //         username: `${props.author}`,
-  //         body: data.get("Comment"),
-  //       })
-  //       .then((res) => res.comment.body)
-  //       .then((comment) => {
-  //         setComment((comment) => comment + " " + data.get("Comment") + ".");
-  //       });
-  //   };
-  //   postData(props.article_id, comment).catch((error) => console.log(error));
-  // };
   const evalLengthOfComment = Object.keys(comments).length;
   return (
     <Box
@@ -58,82 +55,96 @@ const Comments = (props) => {
       }}
     >
       <Box sx={{ color: "text.secondary" }}>
-        Comments:
+        <Box
+          component="form"
+          onSubmit={handleSubmit}
+          sx={{ paddingTop: "15px" }}
+        >
+          <Grid container spacing={3}>
+            <Grid item xs={6}>
+              <TextField
+                fullWidth
+                name="Comment"
+                variant="outlined"
+                id="Comment"
+                label="Comment"
+                autoComplete="Comment"
+                autoFocus
+              />
+            </Grid>
+            <Grid item xs={3}>
+              <Button type="submit" variant="contained" sx={{ mt: 1, mb: 2 }}>
+                Post
+              </Button>
+            </Grid>
+          </Grid>
+        </Box>
+        <Typography
+          gutterBottom
+          variant="h6"
+          component="h2"
+          sx={{ paddingTop: "15px" }}
+        >
+          Comments:{" "}
+        </Typography>
         {evalLengthOfComment ? (
           <React.Fragment>
             {comments.map((comment, idx) => {
               return (
-                <Card
-                  key={idx}
-                  sx={{
-                    height: "100%",
-                    display: "flex",
-                    flexDirection: "column",
-                  }}
-                >
-                  <CardContent sx={{ flexGrow: 1, align: "center" }}>
-                    <Typography gutterBottom variant="h6" component="h2">
+                <Container maxWidth="xl" key={idx} sx={{ paddingTop: "10px" }}>
+                  <Card
+                    component={Paper}
+                    elevation={7}
+                    bgcolor="grey"
+                    sx={{
+                      height: "100%",
+                      display: "flex",
+                      flexDirection: "column",
+                    }}
+                  >
+                    <CardContent sx={{ flexGrow: 1, align: "center" }}>
+                      <Typography component="div">
+                        {evalLengthOfComment ? (
+                          <dl>
+                            <dt>Comment ID: {comment.comment_id}</dt>
+                            <dt>Comment Body: {comment.body}</dt>
+                          </dl>
+                        ) : (
+                          <LinearProgressWithColor />
+                        )}
+                      </Typography>
+                      <Typography sx={{ align: "right" }} component="div">
+                        {evalLengthOfComment ? (
+                          <div>
+                            {comment.created_at
+                              .split("T")[0]
+                              .split("-")
+                              .reverse()
+                              .join("-")}{" "}
+                            by {comment.author}
+                          </div>
+                        ) : (
+                          <LinearProgressWithColor />
+                        )}
+                      </Typography>
+                    </CardContent>
+                    <CardActions>
                       {evalLengthOfComment ? (
-                        <dl>
-                          <dt>Comment ID: {comment.comment_id}</dt>
-                          <dt>Comment Body: {comment.body}</dt>
-                        </dl>
+                        <Box sx={{ color: "text.secondary" }}>
+                          Total Votes: {comment.votes}
+                        </Box>
                       ) : (
                         <LinearProgressWithColor />
                       )}
-                    </Typography>
-                    <Typography sx={{ align: "right" }} component="div">
-                      {evalLengthOfComment ? (
-                        <div>
-                          {comment.created_at
-                            .split("T")[0]
-                            .split("-")
-                            .reverse()
-                            .join("-")}{" "}
-                          by {comment.author}
-                        </div>
-                      ) : (
-                        <LinearProgressWithColor />
-                      )}
-                    </Typography>
-                  </CardContent>
-                  <CardActions>
-                    {evalLengthOfComment ? (
-                      <VoteIcon
-                        votes={comment.votes}
-                        article_id={comment.comment_id}
-                      />
-                    ) : (
-                      <LinearProgressWithColor />
-                    )}
-                  </CardActions>
-                </Card>
+                    </CardActions>
+                  </Card>
+                </Container>
               );
             })}
           </React.Fragment>
         ) : (
           <LinearProgressWithColor />
         )}
-      </Box>
-      <Box component="form" onSubmit={handleSubmit}>
-        <Grid container spacing={3}>
-          <Grid item xs={6}>
-            <TextField
-              fullWidth
-              name="Comment"
-              variant="outlined"
-              id="Comment"
-              label="Comment"
-              autoComplete="Comment"
-              autoFocus
-            />
-          </Grid>
-          <Grid item xs={3}>
-            <Button type="submit" variant="contained" sx={{ mt: 1, mb: 2 }}>
-              Post
-            </Button>
-          </Grid>
-        </Grid>
       </Box>
     </Box>
   );
