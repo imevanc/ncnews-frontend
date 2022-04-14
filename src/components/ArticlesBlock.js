@@ -5,9 +5,11 @@ import Grid from "@mui/material/Grid";
 import LinearProgressWithColor from "./LinearProgressWithColor";
 import * as api from "../api";
 import { useParams, useLocation } from "react-router-dom";
+import ErrorCard from "./ErrorCard";
 
 const ArticlesBlock = (props) => {
   const params = useParams();
+  const [error, setError] = useState(null);
   const topic = props.topic ? props.topic : params.topic;
   const [articles, setArticles] = useState([]);
   const { search } = useLocation();
@@ -25,15 +27,20 @@ const ArticlesBlock = (props) => {
         })
         .then((fetchedArticles) => {
           setArticles(fetchedArticles.articles);
+          setError(null);
         });
     };
-    fetchArticles(tab, sortBy, order).catch((error) => console.log(error));
+    fetchArticles(tab, sortBy, order).catch((error) =>
+      setError("Non Existent Articles Error")
+    );
   }, [tab, sortBy, order]);
 
   return (
     <Container maxWidth="xl" sx={{ paddingTop: "15px" }}>
       <Grid container spacing={5}>
-        {articles.length ? (
+        {error ? (
+          <ErrorCard msg={error} />
+        ) : articles.length ? (
           articles.map((anArticle, idx) => {
             return <ArticleLargeView article={anArticle} key={idx} />;
           })

@@ -17,7 +17,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import { useContext } from "react";
 import { ThemeContext } from "../theme/ThemeContext";
 
-const settings = ["Profile", "Plan", "Logout"];
+const settings = ["happyamy2016", "logout"];
 
 const Header = (props) => {
   const [anchorElUser, setAnchorElUser] = React.useState(null);

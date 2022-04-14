@@ -10,11 +10,14 @@ import { ThemeContext } from "./theme/ThemeContext";
 import * as api from "./api";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ArticleCard from "./components/ArticleCard";
+import ErrorCard from "./components/ErrorCard";
 
 const App = () => {
   const [ourMode, setOurMode] = useState("light");
   const ourTheme = Theme(ourMode);
   const [topics, setTopics] = useState(["all"]);
+  const [error, setError] = useState(null);
+
   useEffect(() => {
     const fetchTopics = async () => {
       return api
@@ -29,9 +32,10 @@ const App = () => {
               ? ["all", ...newTopics]
               : [...topics, ...newTopics];
           });
+          setError(null);
         });
     };
-    fetchTopics().catch((error) => console.log(error));
+    fetchTopics().catch((error) => setError("Non Existent Topic Error"));
   }, []);
   return (
     <BrowserRouter>
@@ -39,11 +43,15 @@ const App = () => {
         <ThemeProvider theme={ourTheme}>
           <CssBaseline />
           <Header ourMode={ourMode} setOurMode={setOurMode} />
-          <NavBar topics={topics} />
+          {error ? <ErrorCard msg={error} /> : <NavBar topics={topics} />}
           <Routes>
             <Route path="/" element={<ArticlesBlock topic={"all"} />} />
-            <Route path="/:topic" element={<ArticlesBlock />} />
+            <Route path="/topics/:topic" element={<ArticlesBlock />} />
             <Route path="/articles/:article_id" element={<ArticleCard />} />
+            <Route
+              path="*"
+              element={<ErrorCard msg={"Non Existent Path Error"} />}
+            />
           </Routes>
           <Footer />
         </ThemeProvider>

@@ -117,7 +117,7 @@ const FiltersBar = (props) => {
                   {props.selectedTopic && Object.keys(selected).length ? (
                     <Button
                       component={Link}
-                      to={`/${props.selectedTopic}?order=${selected.order}&sort_by=${selected.sortBy}`}
+                      to={`topics/${props.selectedTopic}?order=${selected.order}&sort_by=${selected.sortBy}`}
                       variant="contained"
                       type="submit"
                       sx={{

@@ -10,9 +10,11 @@ import VoteIcon from "./VoteIcon";
 import CardActions from "@mui/material/CardActions";
 import Comments from "./Comments";
 import Paper from "@mui/material/Paper";
+import ErrorCard from "./ErrorCard";
 
 const ArticleCard = () => {
   const [article, setArticle] = useState("");
+  const [error, setError] = useState(null);
 
   const article_id = useParams();
   useEffect(() => {
@@ -25,11 +27,12 @@ const ArticleCard = () => {
         .then((fetchedArticle) => {
           const newArticle = fetchedArticle;
           setArticle(newArticle);
+          setError(null);
         });
     };
 
     fetchArticleByArticleId(article_id.article_id).catch((error) =>
-      console.log(error)
+      setError("Non Existent Article ID Error")
     );
   }, [article_id.article_id]);
 
@@ -48,7 +51,9 @@ const ArticleCard = () => {
       >
         <CardContent sx={{ flexGrow: 1, align: "center" }}>
           <Typography gutterBottom variant="h6" component="h2">
-            {evalLengthOfArticle ? (
+            {error ? (
+              <ErrorCard msg={error} />
+            ) : evalLengthOfArticle ? (
               <div>{article.title}</div>
             ) : (
               <LinearProgressWithColor />

@@ -20,7 +20,6 @@ const NavBar = (props) => {
   const ourTheme = useContext(ThemeContext);
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [selectedTopic, setSelectedTopic] = useState(null);
-
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -74,7 +73,7 @@ const NavBar = (props) => {
                     <MenuItem
                       key={idx}
                       component={Link}
-                      to={`/${aTopic}`}
+                      to={`topics/${aTopic}`}
                       state={aTopic}
                       onClick={handleCloseNavMenu}
                     >
@@ -109,7 +108,7 @@ const NavBar = (props) => {
                   return (
                     <Button
                       component={Link}
-                      to={`/${aTopic}?order=desc&sort_by=created_at`}
+                      to={`topics/${aTopic}?order=desc&sort_by=created_at`}
                       state={aTopic}
                       size="small"
                       onClick={handleClick}
