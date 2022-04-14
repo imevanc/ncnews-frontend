@@ -166,24 +166,32 @@ const Comments = (props) => {
                               </Box>
                             </Grid>
                             <Grid item xs={3}>
-                              <Box
-                                sx={{
-                                  color: "text.secondary",
-                                }}
-                              >
-                                <Button
-                                  comment_id={comment.comment_id}
-                                  onClick={handleDelete}
-                                  variant="outlined"
-                                  color="secondary"
-                                  sx={{ mt: 1, mb: 2 }}
+                              {comment.author === "happyamy2016" ? (
+                                <Box
+                                  sx={{
+                                    color: "text.secondary",
+                                  }}
                                 >
-                                  <DeleteForeverIcon
-                                    color="white"
-                                    aria-label="edit"
-                                  />
-                                </Button>
-                              </Box>
+                                  <Button
+                                    comment_id={comment.comment_id}
+                                    onClick={handleDelete}
+                                    variant="outlined"
+                                    color="secondary"
+                                    sx={{ mt: 1, mb: 2 }}
+                                  >
+                                    <DeleteForeverIcon
+                                      color="white"
+                                      aria-label="edit"
+                                    />
+                                  </Button>
+                                </Box>
+                              ) : (
+                                <Box
+                                  sx={{
+                                    color: "text.secondary",
+                                  }}
+                                ></Box>
+                              )}
                             </Grid>
                           </Grid>
                         </React.Fragment>
