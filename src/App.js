@@ -10,6 +10,7 @@ import { ThemeContext } from "./theme/ThemeContext";
 import * as api from "./api";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ArticleCard from "./components/ArticleCard";
+import ErrorCard from "./components/ErrorCard";
 
 const App = () => {
   const [ourMode, setOurMode] = useState("light");
@@ -42,8 +43,9 @@ const App = () => {
           <NavBar topics={topics} />
           <Routes>
             <Route path="/" element={<ArticlesBlock topic={"all"} />} />
-            <Route path="/:topic" element={<ArticlesBlock />} />
+            <Route path="/topics/:topic" element={<ArticlesBlock />} />
             <Route path="/articles/:article_id" element={<ArticleCard />} />
+            <Route path="*" element={<ErrorCard />} />
           </Routes>
           <Footer />
         </ThemeProvider>
