@@ -1,70 +1,81 @@
-# Getting Started with Create React App
+# NCNEWS-FRONTEND
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a JS news application created with Material-UI, React.js & axios. It's hosted on Netlify.
 
-## Available Scripts
+# Table of contents
+- [NCNEWS-FRONTEND](#ncnews-frontend)
+- [Table of contents](#table-of-contents)
+- [General-Information <a name="general-information"></a>](#general-information-)
+- [Technologies <a name="technologies"></a>](#technologies-)
+- [Setup <a name="setup"></a>](#setup-)
+  - [Dependencies <a name="dependencies"></a>](#dependencies-)
+  - [Installation <a name="Installation"></a>](#installation-)
+- [Link To Hosted Application on Netlify <a name="link-to-hosted-app"></a>](#link-to-hosted-application-on-netlify-)
 
-In the project directory, you can run:
+# General-Information <a name="general-information"></a>
 
-### `npm start`
+The NCNEWS app is a React.js application, which replicates the Reddit functionality. It has been developed with a focus on the mobile first approach, so the developer considered different designs for mobile and web views. There is also a light dark mode functionality. The user can read articles and comments, post new comments, vote on articles and delete their comments.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+# Technologies <a name="technologies"></a>
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```
+- axios: 0.26.0
+- react: 17.0.2
+- npm: 8.1.2
+```
 
-### `npm test`
+# Setup <a name="setup"></a>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Dependencies <a name="dependencies"></a>
 
-### `npm run build`
+<br> -> Please have a look at the list below in order to see the version of each dependency that the developer used. <-
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+- emotion/react: 11.8.1
+- emotion/styled: 11.8.1
+- mui/icons-material: 5.5.0
+- mui/material: 5.5.0
+- testing-library/jest-dom: 5.16.2
+- testing-library/react: 12.1.3
+- testing-library/user-event: 13.5.0
+- react-dom: 17.0.2
+- react-router-dom: 6.3.0
+- react-scripts: 5.0.
+- web-vitals: 2.1.4
+```
+## Installation <a name="Installation"></a>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+To run this project you will need to clone this repository onto your local machine.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+$ git clone https://github.com/imevanc/ncnews-frontend.git
+```
 
-### `npm run eject`
+Navigate inside the folder and install all dependencies by entering the following commands on your terminal window:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```
+$ cd nc-project-phase-fronted-ageuk
+$ npm install
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+To run the application locally enter:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```
+$ npm start
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+The application will run on http://localhost:3000.
 
-## Learn More
+# Link To Hosted Application on Netlify <a name="link-to-hosted-app"></a>
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+<p align="center">
+Please see the netlify status page <a href="https://www.netlifystatus.com/">Netlify Status Page</a> for CI/CD updates, before opening the Hosted NCNEWS App.
+</p>
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+<p align="center">
+  ➡️   <a href="https://ncnews-frontend.netlify.app">Hosted NCNEWS App</a>   ⬅️
+</p>
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/96417438/163406114-6c366369-ed3c-4a00-883f-2f6aa150d198.png">
+</p>
