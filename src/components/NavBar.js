@@ -20,7 +20,6 @@ const NavBar = (props) => {
   const ourTheme = useContext(ThemeContext);
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [selectedTopic, setSelectedTopic] = useState(null);
-
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
