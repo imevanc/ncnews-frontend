@@ -2,7 +2,7 @@ import axios from "axios";
 
 // axios config
 const api = axios.create({
-  baseURL: "http://my-ncnews-backend.herokuapp.com/api",
+  baseURL: "https://my-ncnews-backend.herokuapp.com/api",
 });
 
 // get topics
