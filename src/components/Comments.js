@@ -62,8 +62,8 @@ const Comments = (props) => {
         })
         .then((res) => res.comment)
         .then((comment) => {
-          setComments([...comments, comment]);
-          document.getElementById("Comment").nextSibling.nodeValue = "";
+          setComments([comment, ...comments]);
+          document.getElementById("Comment").value = "";
         });
     };
     postData(props.article_id, comments).catch((error) => console.log(error));
