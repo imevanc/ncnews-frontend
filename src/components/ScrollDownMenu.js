@@ -57,7 +57,7 @@ const ScrollDownMenu = (props) => {
   };
   const handleClose = (event) => {
     setAnchorEl(null);
-    props.query === "sort_by"
+    props.query === "created_at"
       ? props.setSelected({
           order: props.selected["order"],
           sortBy: event.target.getAttribute("name"),

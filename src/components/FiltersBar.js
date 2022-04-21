@@ -17,18 +17,21 @@ import Grid from "@mui/material/Grid";
 
 const FiltersBar = (props) => {
   const ourTheme = useContext(ThemeContext);
-  const [selected, setSelected] = useState({ sortBy: " ", order: " " });
+  const [selected, setSelected] = useState({
+    sortBy: "created_at",
+    order: "desc",
+  });
   const sortByOptions = ["created_at", "title", "author", "votes"];
   const orderOption = ["asc", "desc"];
   const scrollbars = [
     <ScrollDownMenu
-      query={"sort_by"}
+      query={"created_at"}
       options={sortByOptions}
       selected={selected}
       setSelected={setSelected}
     />,
     <ScrollDownMenu
-      query={"order"}
+      query={"desc"}
       options={orderOption}
       selected={selected}
       setSelected={setSelected}
@@ -82,7 +85,7 @@ const FiltersBar = (props) => {
                 }}
               >
                 {scrollbars.map((option, idx) => (
-                  <MenuItem key={idx} onClick={handleCloseNavMenu}>
+                  <MenuItem key={idx} onClick={handleCloseNavMenu} mx="10px">
                     <Typography
                       textAlign="center"
                       sx={{
