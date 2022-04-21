@@ -17,6 +17,7 @@ const VoteIcon = (props) => {
       .then((article) => {
         const newVotes = article.votes;
         setVotes(newVotes);
+        props.setClicked(Boolean(true));
       })
       .catch((error) => console.log(error));
   };
@@ -34,10 +35,10 @@ const VoteIcon = (props) => {
     >
       <Box sx={{ color: "text.secondary" }}>Total Votes: {votes}</Box>
       <Box sx={{ "& > :not(style)": { m: 1 } }}>
-        <Fab color="primary" aria-label="add">
+        <Fab color="primary" aria-label="add" disabled={props.clicked}>
           <ThumbUpIcon onClick={handleThumbUp} />
         </Fab>
-        <Fab color="secondary" aria-label="edit">
+        <Fab color="secondary" aria-label="edit" disabled={props.clicked}>
           <ThumbDownAltIcon onClick={handleThumbDown} />
         </Fab>
       </Box>

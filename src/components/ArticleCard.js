@@ -15,6 +15,7 @@ import ErrorCard from "./ErrorCard";
 const ArticleCard = () => {
   const [article, setArticle] = useState("");
   const [error, setError] = useState(null);
+  const [clicked, setClicked] = useState(Boolean(false));
 
   const article_id = useParams();
   useEffect(() => {
@@ -86,7 +87,12 @@ const ArticleCard = () => {
         </CardContent>
         <CardActions>
           {evalLengthOfArticle ? (
-            <VoteIcon votes={article.votes} article_id={article.article_id} />
+            <VoteIcon
+              clicked={clicked}
+              setClicked={setClicked}
+              votes={article.votes}
+              article_id={article.article_id}
+            />
           ) : (
             <LinearProgressWithColor />
           )}
