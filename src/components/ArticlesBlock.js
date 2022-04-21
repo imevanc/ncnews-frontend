@@ -34,13 +34,13 @@ const ArticlesBlock = (props) => {
       setError("Non Existent Articles Error")
     );
   }, [tab, sortBy, order]);
-
+  if (error) {
+    <ErrorCard msg={error} />;
+  }
   return (
     <Container maxWidth="xl" sx={{ paddingTop: "15px" }}>
       <Grid container spacing={5}>
-        {error ? (
-          <ErrorCard msg={error} />
-        ) : articles.length ? (
+        {articles.length ? (
           articles.map((anArticle, idx) => {
             return <ArticleLargeView article={anArticle} key={idx} />;
           })
