@@ -37,7 +37,12 @@ const ArticleCard = () => {
     );
   }, [article_id.article_id]);
 
+  if (error) {
+    return <ErrorCard msg={error} />;
+  }
+
   const evalLengthOfArticle = Object.keys(article).length;
+
   return (
     <Container maxWidth="xl" sx={{ paddingTop: "10px" }}>
       <Card
@@ -52,9 +57,7 @@ const ArticleCard = () => {
       >
         <CardContent sx={{ flexGrow: 1, align: "center" }}>
           <Typography gutterBottom variant="h6" component="h2">
-            {error ? (
-              <ErrorCard msg={error} />
-            ) : evalLengthOfArticle ? (
+            {evalLengthOfArticle ? (
               <div>{article.title}</div>
             ) : (
               <LinearProgressWithColor />
